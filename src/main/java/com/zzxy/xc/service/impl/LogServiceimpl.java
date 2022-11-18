@@ -32,7 +32,9 @@ public class LogServiceimpl implements LogService{
 		return pageObj;
 	}
 	public int doDeleteLog(Integer[] ids) {
-
-		return 0;
+		Assert.isEmpty(ids == null|| ids.length==0,"未选择数据！");
+		int n = dao.doDeleteByIds(ids);
+		Assert.isEmpty(n==0,"数据已被删除！");
+		return n;
 	}
 }

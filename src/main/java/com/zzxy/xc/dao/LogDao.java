@@ -10,5 +10,6 @@ import java.util.List;
 public interface LogDao {
 	
 	List<Log> findLogObject(String username);
-	
+
+    int doDeleteByIds(Integer[] ids);
 }

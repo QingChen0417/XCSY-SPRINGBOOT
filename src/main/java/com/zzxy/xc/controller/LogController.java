@@ -24,6 +24,6 @@ public class LogController {
 	@RequestMapping("deleteLog")
 	public JsonResult findLogDelete(@RequestParam("ids[]") Integer[] ids){
 		int n = service.doDeleteLog(ids);
-		return null;
+		return new JsonResult("删除成功！");
 	}
 }
