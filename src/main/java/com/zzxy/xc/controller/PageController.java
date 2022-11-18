@@ -24,4 +24,8 @@ public class PageController {
 		return "common/page";
 	}
 
+	@RequestMapping("upLoadUI")
+	public String upLoadUI() {
+		return "upload";
+	}
 }
