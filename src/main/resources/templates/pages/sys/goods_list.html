@@ -1,0 +1,91 @@
+
+<div class="row">
+	<div class="col-xs-12">
+		<div class="box">
+			<div class="box-header">
+				<h3 class="box-title">商品列表</h3>
+				<div class="box-tools">
+					<div class="input-group input-group-sm" style="width: 350px;">
+						<input type="text" name="table_search" id="searchNameId"
+							class="form-control pull-right" placeholder="商品名">
+
+						<div class="input-group-btn">
+							<button type="button" class="btn btn-default btn-search">
+                                <i class="fa fa-search"></i>
+							</button>
+							<button type="button" class="btn btn-default btn-add">添加</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /.box-header -->
+			<div class="box-body table-responsive no-padding">
+				<form>
+				  <table class="table table-hover">
+					<thead>
+						<tr>
+						    <th>商品编号</th>
+							<th>商品图片</th>
+							<th>商品名称</th>
+							<th>商品类型</th>
+							<th>价格</th>
+							<th>商品详情</th>
+							<th>库存</th>
+							<th>状态</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+					<tbody id="tbodyId">
+						<tr id="tb-tr">
+							<td>12312312</td>
+							<td class="table-img"><img src="dist/img/photo1.png"></td>
+							<td>1341311234</td>
+							<td>13241234</td>
+							<td>3224</td>
+							<td>412341234123qwerqwerq1234123</td>
+							<td>1234</td>
+							<td>禁用</td>
+							<td class="table-delupt"><a>删除</a> <a>修改</a></td>
+						</tr>
+					</tbody>
+				  </table>
+				</form>
+			</div>
+			<!-- /.box-body -->
+			<div id="pageId" class="box-footer clearfix">
+            </div>
+		</div>
+		<!-- /.box -->
+	</div>
+</div>
+<script type="text/javascript">
+	$(function(){
+		$("#pageId").load("doPageUI", doGetObjects());
+	})
+	//页面加载完成异步加载当前页数据
+   function doGetObjects(){
+	   var url="goods/finGoods";
+	   var curPage = $("#pageId").data("curPage");
+	   var params = {
+			   	"name" : $("#searchNameId").val().trim(),
+			   	"curPage":curPage ? curPage : 1,
+			   	"pageSize" : 5
+		};
+	   $.get(url, params, function(result) {
+		   if(result.state == 1) {
+			   //填充数据
+			   //loadUserData(result.data.pageData);
+			   //分页
+			   setPageData(result.data);
+ 		   } else {
+ 			   alert(result.message);
+ 		   }
+	   })
+   }
+   function loadUserData(){
+
+   }
+
+</script>
+
+
