@@ -45,7 +45,7 @@ spring:
         keep-alive: 30  #活着的时间,默认为秒
       thread-name-prefix: zz-pool-thread- #自定义线程名前缀
   resources:
-    static-locations: classpath:/static/images/
+    static-locations: classpath:/templates/,classpath:/static/image/,classpath:/static
       
 pagehelper:
    helper-dialect: mysql #指定方言为mysql
