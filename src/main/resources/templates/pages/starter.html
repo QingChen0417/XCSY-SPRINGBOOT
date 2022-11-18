@@ -271,7 +271,6 @@ desired effect
             <li><a id="load-menu-id">菜单管理</a></li>
             <li><a id="load-dept-id">店铺管理</a></li>
             <li><a id="load-role-id">角色管理</a></li>
-            <li><a id="load-log-id"> 日志管理</a></li>
             <li><a id="load-pwd-id"> 修改密码</a></li>
           </ul>
         </li>
@@ -301,7 +300,6 @@ desired effect
             <li><a id="load-menu-id">地址管理</a></li>
             <li><a id="load-dept-id">店铺管理</a></li>
             <li><a id="load-role-id">角色管理</a></li>
-            <li><a id="load-log-id"> 日志管理</a></li>
             <li><a id="load-pwd-id"> 修改密码</a></li>
           </ul>
         </li>
@@ -317,7 +315,22 @@ desired effect
             <li><a id="load-menu-id">地址管理</a></li>
             <li><a id="load-dept-id">店铺管理</a></li>
             <li><a id="load-role-id">角色管理</a></li>
-            <li><a id="load-log-id"> 日志管理</a></li>
+            <li><a id="load-pwd-id"> 修改密码</a></li>
+          </ul>
+        </li>
+        <li class="treeview">
+          <a href="#"><i class="fa fa-link"></i> 
+          <span>日志管理</span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a id="load-log-id"> 日志列表</a></li>
+            <li><a id="load-user-id">订单管理</a></li>
+            <li><a id="load-menu-id">地址管理</a></li>
+            <li><a id="load-dept-id">店铺管理</a></li>
+            <li><a id="load-role-id">角色管理</a></li>
             <li><a id="load-pwd-id"> 修改密码</a></li>
           </ul>
         </li>
@@ -462,13 +475,12 @@ desired effect
 <script src="dist/js/adminlte.min.js"></script>
 <script type="text/javascript">
 	var idUrls = [
-		{id : "load-log-id", url : "sys/log_list"},
-		{id : "load-menu-id", url : "sys/menu_list"},
+		{id : "load-log-id", url : "log/log_list"},
+		/* {id : "load-menu-id", url : "sys/menu_list"},
 		{id : "load-role-id", url : "sys/role_list"},
 		{id : "load-user-id", url : "sys/user_list"},
-		{id : "load-dept-id", url : "sys/dept_list"}
+		{id : "load-dept-id", url : "sys/dept_list"} */
 	];
-
 	$(function(){
 		//key元素下标, value为下标对应的元素
 		$.each(idUrls, function(key, value){
