@@ -14,4 +14,10 @@
 		<include refid="queryUsername"/>
 			order by createdTime
 	</select>
+	<delete id="doDeleteByIds">
+	delete from xc_logs where id in
+	<foreach collection="array" open="(" close=")" separator="," item="ids">
+			#{ids}
+	</foreach>
+	</delete>
 </mapper>
