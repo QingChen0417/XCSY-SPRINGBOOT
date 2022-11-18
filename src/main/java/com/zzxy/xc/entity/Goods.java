@@ -27,5 +27,4 @@ public class Goods implements Serializable {
 	private Date modifiedTime;//变质时间
 	private String modifiedUser;//修改的用户
 
-
 }
