@@ -54,31 +54,31 @@
 			doGetObjects();
 		});
 	})
-	
-	function doDeleteLog() {
-		var checks = $("#tbodyId input[type='checkbox']:checked");
+
+	function doDeleteLog(){
+		var checks = $("#tbodyId input[type='checkbox']:checked");//拿到tbody下所有选中的多选框
 		if(!checks.length){
-			alert("请选择要删除的数据! ")
+			alert("请选择要删除的数据！");
 			return;
 		}
-		if(!confirm("确定删除吗? ")) {
-			return
+		if(!confirm("确定要删除吗？")){
+			return;
 		}
-		var url = "log/deleteLog";
-		var ids = [];
-		$.each(checks, function(){
-			var id = $(this).val();//this表示每一个元素
-			ids.push(id);
+		var ids =[];//空数组
+		$.each(checks,function(){
+			var id =$(this).val();//获取到每一个多选框的value值也就是数据的id
+			ids.push(id);//ids.push是添加到ids数组里面
 		})
-		var params = {ids : ids};
-		$.get(url, params, function(result) {
-			if(result.state == 1) {
-				alert("删除了" + result.data + "条数据");
-				doGetObjects();
-			} else if(result.state == 0) {
+		var params ={"ids" : ids};
+		var url ="log/deleteLog";
+		$.get(url,params,function(result){
+			if (result.state == 0) {
 				alert(result.message);
+			}else if(result.state == 1){
+				alert("成功删除" + result.data +"条数据！");
+				doGetObjects();//刷新数据
 			}
-		})
+		});
 	}
 	
 	function doGetObjects() {
@@ -102,7 +102,7 @@
 	}
 	function setTableBodyData(data) {
 		$("#tbodyId").empty();
-		var html = "";
+		var html = ""
 		if(!data.length) {
 			html += " <tr><td colspan='7'>数据正在加载中...</td></tr>";
 		} else {
@@ -122,6 +122,7 @@
 	     	"<td>"+data.time+"</td></tr>";
 	     return td;
 	}
+	
 </script>
 
 
