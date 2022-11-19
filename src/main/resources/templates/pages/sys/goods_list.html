@@ -24,7 +24,6 @@
 				<table class="table table-hover">
 					<thead>
 					<tr>
-						<th class="table-radio"></th>
 						<th>序号</th>
 						<th>商品图片</th>
 						<th>商品名称</th>
@@ -72,7 +71,6 @@
 	   })
    }
    function loadUserData(data){
-		debugger
 	   var tbody=$("#tbodyId");
 	   tbody.empty();//清空数据
 	   for(var i in data){
@@ -84,7 +82,6 @@
    }
    function doCreateTr(data){
 	   var tr ="<tr id='tb-tr'><td><input type='radio' name='radioId' value='" + data.id + "'></td>"
-			   + "<td class='table-name'>" + data.cateid + "</td>"
 			   + "<td class='table-img'><img src='" + (data.imgUrl ? data.imgUrl : "") + "'></td>"
 			   + "<td class='table-name'>" + data.name + "</td>"
 			   + "<td class='table-price'>" + data.price + "</td>"

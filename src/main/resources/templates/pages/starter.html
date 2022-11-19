@@ -17,6 +17,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="bower_components/Ionicons/css/ionicons.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+  <link rel="stylesheet" href="dist/css/goods.css">
   <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
         page. However, you can choose any other skin. Make sure you
         apply the skin class to the body tag so the changes take effect. -->
@@ -281,7 +282,7 @@ desired effect
          </span>
         </a>       
         <ul class="treeview-menu">
-            <li><a id="load-brand-id">商品列表</a></li>
+            <li><a id="load-goods-id">商品列表</a></li>
         </ul>
         </li> 
         <li class="treeview">
@@ -458,7 +459,8 @@ desired effect
 <script src="dist/js/adminlte.min.js"></script>
 <script type="text/javascript">
 	var idUrls = [
-		{id : "load-log-id", url : "log/log_list"},
+		{id : "load-log-id", url : "sys/log_list"},
+        {id : "load-goods-id", url : "sys/goods_list"}
 		/* {id : "load-menu-id", url : "sys/menu_list"},
 		{id : "load-role-id", url : "sys/role_list"},
 		{id : "load-user-id", url : "sys/user_list"},
