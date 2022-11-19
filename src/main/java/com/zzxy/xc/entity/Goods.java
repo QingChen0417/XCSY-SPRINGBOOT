@@ -19,7 +19,7 @@ public class Goods implements Serializable {
 	private String name;//商品名
 	private String subtitle;//商品详情
 	private String imgUrl;//商品图片
-	private Date price;//价格
+	private Double price;//价格
 	private Integer stock;//库存
 	private Integer state;//状态
 	private Date createdTime;//创建时间

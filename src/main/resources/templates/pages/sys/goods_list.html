@@ -1,59 +1,48 @@
-
 <div class="row">
 	<div class="col-xs-12">
 		<div class="box">
 			<div class="box-header">
-				<h3 class="box-title">商品列表</h3>
+				<h3 class="box-title">商品管理</h3>
+
 				<div class="box-tools">
 					<div class="input-group input-group-sm" style="width: 350px;">
 						<input type="text" name="table_search" id="searchNameId"
-							class="form-control pull-right" placeholder="商品名">
+							   class="form-control pull-right" placeholder="商品名">
 
 						<div class="input-group-btn">
 							<button type="button" class="btn btn-default btn-search">
-                                <i class="fa fa-search"></i>
+								<i class="fa fa-search"></i>
 							</button>
 							<button type="button" class="btn btn-default btn-add">添加</button>
+							<button type="button" class="btn btn-default btn-update">修改</button>
 						</div>
 					</div>
 				</div>
 			</div>
 			<!-- /.box-header -->
 			<div class="box-body table-responsive no-padding">
-				<form>
-				  <table class="table table-hover">
+				<table class="table table-hover">
 					<thead>
-						<tr>
-						    <th>商品编号</th>
-							<th>商品图片</th>
-							<th>商品名称</th>
-							<th>商品类型</th>
-							<th>价格</th>
-							<th>商品详情</th>
-							<th>库存</th>
-							<th>状态</th>
-							<th>操作</th>
-						</tr>
+					<tr>
+						<th class="table-radio"></th>
+						<th>序号</th>
+						<th>商品图片</th>
+						<th>商品名称</th>
+						<th>价格</th>
+						<th>商品详情</th>
+						<th>库存</th>
+						<th>状态</th>
+						<th>操作</th>
+					</tr>
 					</thead>
 					<tbody id="tbodyId">
-						<tr id="tb-tr">
-							<td>12312312</td>
-							<td class="table-img"><img src="dist/img/photo1.png"></td>
-							<td>1341311234</td>
-							<td>13241234</td>
-							<td>3224</td>
-							<td>412341234123qwerqwerq1234123</td>
-							<td>1234</td>
-							<td>禁用</td>
-							<td class="table-delupt"><a>删除</a> <a>修改</a></td>
-						</tr>
+
 					</tbody>
-				  </table>
-				</form>
+				</table>
+			</div>
+			<div id="pageId" class="box-footer clearfix">
 			</div>
 			<!-- /.box-body -->
-			<div id="pageId" class="box-footer clearfix">
-            </div>
 		</div>
 		<!-- /.box -->
 	</div>
@@ -64,7 +53,7 @@
 	})
 	//页面加载完成异步加载当前页数据
    function doGetObjects(){
-	   var url="goods/finGoods";
+	   var url="goods/findGoods";
 	   var curPage = $("#pageId").data("curPage");
 	   var params = {
 			   	"name" : $("#searchNameId").val().trim(),
@@ -74,7 +63,7 @@
 	   $.get(url, params, function(result) {
 		   if(result.state == 1) {
 			   //填充数据
-			   //loadUserData(result.data.pageData);
+			   loadUserData(result.data.pageData);
 			   //分页
 			   setPageData(result.data);
  		   } else {
@@ -82,8 +71,28 @@
  		   }
 	   })
    }
-   function loadUserData(){
-
+   function loadUserData(data){
+		debugger
+	   var tbody=$("#tbodyId");
+	   tbody.empty();//清空数据
+	   for(var i in data){
+		   var tr = doCreateTr(data[i]);
+		   tbody.append(tr);
+		   //每一行上面绑定当前行数据
+		   tbody.find("tr:last").data("goodsRow", data[i]);
+	   }
+   }
+   function doCreateTr(data){
+	   var tr ="<tr id='tb-tr'><td><input type='radio' name='radioId' value='" + data.id + "'></td>"
+			   + "<td class='table-name'>" + data.cateid + "</td>"
+			   + "<td class='table-img'><img src='" + (data.imgUrl ? data.imgUrl : "") + "'></td>"
+			   + "<td class='table-name'>" + data.name + "</td>"
+			   + "<td class='table-price'>" + data.price + "</td>"
+			   + "<td class='table-subtitle'>" + (data.subtitle ? data.subtitle : "") + "</td>"
+			   + "<td class='table-price'>" + (data.stock ? data.stock : "0") + "</td>"
+			   + "<td class='table-button'>" + (data.state == 0 ? "下架" : "上架") + "</td>"
+			   + "<td><button type='button' class='btn btn-default btn-valid' onclick='changeValid(this)'>" + (data.state ? '下架' : '上架') + "</td></tr>";
+	   return tr;
    }
 
 </script>
