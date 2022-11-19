@@ -22,4 +22,10 @@ public class UserController {
         return new JsonResult(pageObj);
     }
 
+    @RequestMapping("updateValid")
+    public JsonResult updateValid(Integer id, Integer valid) {
+        userService.updateValid(id, valid);
+        return new JsonResult("修改成功");
+    }
+
 }

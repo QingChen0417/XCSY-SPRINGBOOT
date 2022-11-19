@@ -4,6 +4,7 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.zzxy.common.entity.PageProperties;
 import com.zzxy.common.entity.Pagination;
+import com.zzxy.common.util.Assert;
 import com.zzxy.xc.dao.UserDao;
 import com.zzxy.xc.dao.UsermemberDao;
 import com.zzxy.xc.entity.Log;
@@ -21,6 +22,7 @@ public
 class UserserviceImpl implements UserService {
 
 
+    @Autowired
     private UserDao dao;
 
     @Autowired
@@ -29,14 +31,18 @@ class UserserviceImpl implements UserService {
     @Autowired
     private PageProperties pp;
 
-
     public Pagination findUsermemberVo(String username, Integer curPage, Integer pageSize) {
         pageSize = pageSize ==0 ? pp.getPageSize() : pageSize;
-        System.out.println(curPage);
         Page<UsermemberVo> page = PageHelper.startPage(curPage,pageSize);
         List<UsermemberVo> list = umDao.findUsermemberVo(username);
         Pagination pageObj = new Pagination(curPage, (int)page.getTotal(), pageSize);
         pageObj.setPageData(list);
         return pageObj;
+    }
+
+    public void updateValid(Integer id, Integer valid) {
+        Assert.isEmpty(id == null || id == 0, "请选择要修改的用户");
+        Integer n = dao.updateValid(id, valid);
+        Assert.isEmpty(n == 0, "修改失败");
     }
 }
