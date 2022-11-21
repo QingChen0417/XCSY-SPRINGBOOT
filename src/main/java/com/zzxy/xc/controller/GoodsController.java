@@ -2,6 +2,7 @@ package com.zzxy.xc.controller;
 
 import com.zzxy.common.entity.JsonResult;
 import com.zzxy.common.entity.Pagination;
+import com.zzxy.xc.entity.Goods;
 import com.zzxy.xc.service.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,4 +24,14 @@ public class GoodsController {
         return new JsonResult(pagina);
     }
 
+    @RequestMapping("updateValid")
+    public JsonResult updateValid(Integer id, Integer state){
+        service.updateValid(id,state);
+        return new JsonResult("修改成功");
+    }
+    @RequestMapping("saveGoods")
+    public JsonResult saveGoods(Goods goods){
+        service.saveGoods(goods);
+        return new JsonResult("添加成功");
+    }
 }

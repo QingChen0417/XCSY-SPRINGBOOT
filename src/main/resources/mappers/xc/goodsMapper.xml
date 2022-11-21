@@ -16,4 +16,7 @@
         order by createdTime
     </select>
 
+    <insert id="saveGoods" keyProperty="id" useGeneratedKeys="true" parameterType="com.zzxy.xc.entity.Goods">
+        insert into xc_goods values (null,#{cateid},#{name},#{subtitle},#{imgUrl},#{price},#{stock},#{state},now(),#{createdUser},now(),#{modifiedUser})
+    </insert>
 </mapper>

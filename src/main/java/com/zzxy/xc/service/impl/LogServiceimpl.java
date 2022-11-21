@@ -18,7 +18,7 @@ public class LogServiceimpl implements LogService{
 
 	@Autowired
 	private LogDao dao;
-	
+
 	@Autowired
 	private PageProperties pp;
 	

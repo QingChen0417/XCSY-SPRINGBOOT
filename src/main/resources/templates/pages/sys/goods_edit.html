@@ -4,28 +4,57 @@
       </div>
       <!-- /.box-header -->
       <!-- form start -->
-      <form class="form-horizontal">
+      <div class="form-horizontal">
         <div class="box-body">
-          <div class="form-group">
-            <label for="nameId" class="col-sm-2 control-label">商品名称</label>
-
-            <div class="col-sm-10">
-              <input type="text" class="form-control" name="name" id="nameId" placeholder="商品名称">
+            <div class="form-group">
+                <label for="nameId" class="col-sm-2 control-label">商品名称</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="name" id="nameId" placeholder="商品名称">
+                </div>
             </div>
-          </div>
-          <div class="form-group">
-            <label for="noteId" class="col-sm-2 control-label">详情</label>
-
-            <div class="col-sm-10">
-              <input type="text" class="form-control" name="note" id="noteId" placeholder="详情">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">图片</label>
+                <div class="col-sm-10">
+                    <form id="upLoadImgForm" enctype="multipart/form-data">
+                       <input type="file" id="upLoadImg" name="file" style="display: none">
+                        <label for="upLoadImg" class="group-label">选择图片</label>
+                        <img src="" id="goodsImg">
+                    </form>
+                </div>
             </div>
-          </div>
-          <div class="form-group">
-				<label class="col-sm-2 control-label">授权</label>
-				<div class="col-sm-10">
-						<ul id="menuTree" class="ztree"></ul>
-				</div>
-		  </div>
+            <div class="form-group">
+                <label for="cateId" class="col-sm-2 control-label">类型</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control load-sys-dept" readonly="readonly" id="cateId" placeholder="类型">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="priceId" class="col-sm-2 control-label">价格</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="price" id="priceId" placeholder="价格">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="subtitleId" class="col-sm-2 control-label">商品详情</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="subtitle" id="subtitleId" placeholder="详情">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="stockId" class="col-sm-2 control-label">库存</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="stock" id="stockId" placeholder="库存数量">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">状态</label>
+                <div class="col-sm-10" id="stateValue">
+                    <label for="stateShang">上架</label>
+                    <input type="radio" name="radio" id="stateShang" value="1" checked>
+                    <label for="stateXia">下架</label>
+                    <input type="radio" name="radio" id="stateXia" value="0">
+                </div>
+            </div>
         </div>
         <!-- /.box-body -->
         <div class="box-footer">
@@ -33,5 +62,125 @@
           <button type="button" class="btn btn-info pull-right btn-save">Save</button>
         </div>
         <!-- /.box-footer -->
-      </form>
+      </div>
+    <div class="layui-layer layui-layer-page layui-layer-molv layer-anim" id="treeLayer" type="page" times="2" showtime="0" contype="object"
+         style="z-index:59891016; width: 300px; height: 450px; top: 100px; left: 500px; display:none">
+        <div class="layui-layer-title" style="cursor: move;">选择部门</div>
+        <div class="layui-layer-content" style="height: 358px;">
+            <div style="padding: 10px;" class="layui-layer-wrap">
+                <ul id="zTreeId" class="ztree"></ul>    <!-- 动态加载树 -->
+            </div>
+        </div>
+        <span class="layui-layer-setwin"> <a class="layui-layer-ico layui-layer-close layui-layer-close1 btn-cancel" ></a></span>
+        <div class="layui-layer-btn layui-layer-btn-">
+            <a class="layui-layer-btn0 btn-confirm">确定</a>
+            <a class="layui-layer-btn1 btn-cancel">取消</a>
+        </div>
     </div>
+    </div>
+<script type="text/javascript" src="bower_components/ztree/jquery.ztree.all.min.js"></script>
+<script type="text/javascript">
+    var zTree;
+    //初始化zTree时会用到
+    var setting = {
+        data : {
+            simpleData : {
+                enable : true,
+                idKey : "id",  //节点数据中保存唯一标识的属性名称
+                pIdKey : "parentId",  //节点数据中保存其父节点唯一标识的属性名称
+                rootPId : null  //根节点id
+            }//json 格式javascript对象
+        }
+    }
+
+    $(function(){
+        //动态绑定
+        $("#cateId").on("click", loadCateZTree);
+        $(".box-footer").on("click", ".btn-cancel", backToGoodsUI)
+                        .on("click", ".btn-save", saveOrUpdateGoods);
+        $(".layui-layer").on("click", ".btn-cancel", hideCateZtree)
+                         .on("click", ".btn-confirm", sureCateId);
+    })
+    function sureCateId() {
+        var node = zTree.getSelectedNodes();//得到被选中的节点
+        $("#cateId").val(node[0].name);
+        $("#cateId").data("cateId", node[0].id);
+        hideCateZtree();//隐藏节点
+    }
+    function backToGoodsUI() {
+        $("#mainContentId").data("goodsId", "");//返回取消绑定数据
+        $("#mainContentId").load("goods/goods_list");
+    }
+    function saveOrUpdateGoods(){
+        var name = $("#nameId").val();
+        var imgUrl = $("#goodsImg").attr("src");
+        var cate = $("#cateId").data("cateId");
+        var price = $("#priceId").val();
+        var subtitle = $("#subtitleId").val();
+        debugger;
+        var stock = $("#stockId").val();
+        var state = $("#stateValue input[type='radio']:checked").val();
+        if (!name || !price){
+            alert("商品名,价格不能为空!!!");
+            return;
+        }
+        var params = {
+            name:name,
+            imgUrl:imgUrl,
+            price:price,
+            subtitle:subtitle,
+            stock:stock,
+            state:state
+        }
+        var url = $("#mainContentId").data("goodsId") ? "goods/udpateGoods" : "goods/saveGoods";
+        if ($("#mainContentId").data("goodsId")) {
+            params.id = $("#mainContentId").data("goodsId");
+        }
+        $.get(url,params,function (result){
+            if (result.state == 1){
+                alert(result.data);
+                backToGoodsUI();
+            }else{
+                alert(result.message);
+            }
+        })
+    }
+    function hideCateZtree() {
+        $("#treeLayer").hide(300);
+    }
+
+    function loadCateZTree() {
+        var url = "cate/findCateZtree";
+        $.get(url, {}, function(result) {
+            if(result.state == 1) {
+                zTree = $.fn.zTree.init($("#zTreeId"), setting, result.data);
+                $("#treeLayer").show();
+            } else {
+                alert(result.message);
+            }
+            console.log(result);
+        }).fail(function(){//ajax回调失败
+            alert(123);
+        })
+    }
+
+    /* 文件改变时触发文件上传 */
+    $('#upLoadImg').change(function(){
+        // 设置ajax参数
+        var options = {
+            url : "upload/uploadImage",
+            type: "POST",
+            success: function (data) {
+                // 设置图片地址
+                var imgUrl = ""+data;
+                $("#goodsImg").attr("src", imgUrl);
+            }
+        }
+        // 提交表单
+        $('#upLoadImgForm').ajaxSubmit(options);
+        return false;
+    })
+</script>
+
+
+

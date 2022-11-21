@@ -31,5 +31,20 @@ public class GoodsServiceImpl implements GoodsService {
         return pageObj;
     }
 
+    public Integer updateValid(Integer id, Integer state) {
+        Assert.isEmpty(id == 0 || id == null, "请选择要修改的用户");
+        Assert.isEmpty(state == null, "操作有误");
+        Integer n = dao.updateValid(id,state);
+        return n;
+    }
+
+    @Override
+    public Integer saveGoods(Goods goods) {
+        Assert.isEmpty(goods == null || goods.getName() == null, "请填写商品信息");
+        Integer n = dao.saveGoods(goods);
+        Assert.isEmpty(n == 0, "添加失败");
+        return n;
+    }
+
 
 }
