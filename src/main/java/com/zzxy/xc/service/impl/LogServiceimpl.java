@@ -2,11 +2,11 @@ package com.zzxy.xc.service.impl;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.zzxy.common.entity.PageProperties;
 import com.zzxy.common.entity.Pagination;
 import com.zzxy.common.util.Assert;
 import com.zzxy.xc.dao.LogDao;
 import com.zzxy.xc.entity.Log;
-import com.zzxy.common.entity.pageProperties;
 import com.zzxy.xc.service.LogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +20,7 @@ public class LogServiceimpl implements LogService{
 	private LogDao dao;
 	
 	@Autowired
-	private pageProperties pp;
+	private PageProperties pp;
 	
 	public Pagination findLogService(String username, Integer pageSize, Integer curPage) {
 		pageSize = pageSize ==0 ? pp.getPageSize() : pageSize;

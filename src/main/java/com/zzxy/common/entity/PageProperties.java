@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ConfigurationProperties(prefix = "com.zzxy.page")
 @Data
-public class pageProperties {
+public class PageProperties {
 	private Integer pageSize;
 
 }

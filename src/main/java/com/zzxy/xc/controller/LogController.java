@@ -17,7 +17,6 @@ public class LogController {
 	
 	@RequestMapping("findLogObjects")
 	public JsonResult findLogObjects(String username,@RequestParam(defaultValue = "4") Integer pageSize,@RequestParam(defaultValue = "1") Integer curPage) {
-		System.out.println(pageSize+","+curPage);
 		Pagination pageObj = service.findLogService(username,pageSize,curPage);
 		return new JsonResult(pageObj);
 	}

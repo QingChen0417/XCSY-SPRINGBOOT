@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace:命名空间 对应一个dao层的全路径 -->
+<mapper namespace="com.zzxy.xc.dao.RoleDao">
+	<sql id="queryUsername">
+		<where>
+			<if test="name !=null and name !=''">
+				name like concat("%", #{name}, "%")
+			</if>
+		</where>
+	</sql>
+	<select id="findRole" resultType="com.zzxy.xc.entity.Role">
+		select * from xc_roles
+		<include refid="queryUsername"/>
+		order by createdTime
+	</select>
+</mapper>
