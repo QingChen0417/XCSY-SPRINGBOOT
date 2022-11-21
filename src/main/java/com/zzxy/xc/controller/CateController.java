@@ -16,6 +16,10 @@ public class CateController {
     @Autowired(required=false)
     private CateService service;
 
+    /**
+     * 拿到所有分类数据
+     * @return
+     */
     @RequestMapping("findCateZtree")
     public JsonResult findCateZtree(){
         List<Category> list = service.findCateZtree();

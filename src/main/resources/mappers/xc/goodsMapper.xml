@@ -19,4 +19,11 @@
     <insert id="saveGoods" keyProperty="id" useGeneratedKeys="true" parameterType="com.zzxy.xc.entity.Goods">
         insert into xc_goods values (null,#{cateid},#{name},#{subtitle},#{imgUrl},#{price},#{stock},#{state},now(),#{createdUser},now(),#{modifiedUser})
     </insert>
+    
+    <select id="findGoodsCateVo" resultMap="goodsCateVo">
+        select * from xc_goods where id=#{id}
+    </select>
+    <resultMap id="goodsCateVo" type="com.zzxy.xc.vo.GoodsCateVo">
+        <collection property="category" select="com.zzxy.xc.dao.CateDao.findCateByCateId" column="cateid"></collection>
+    </resultMap>
 </mapper>

@@ -11,4 +11,7 @@ public interface CateDao {
 
     @Select("select id,name,parentid from xc_category")
     List<Category> findCateZtree();
+
+    @Select("select * from xc_category where id = #{id}")
+    Category findCateByCateId(Integer id);
 }

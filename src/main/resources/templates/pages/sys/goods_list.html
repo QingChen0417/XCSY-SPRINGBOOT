@@ -110,14 +110,14 @@
 	}
 	function saveGoodsUI(){
 		var bool = $(this).hasClass("btn-update");
-		var title = bool ? "修改用户" : "添加用户";
+		var title = bool ? "修改商品" : "添加商品";
 		if(bool) {
 			var radioCheck = $("#tbodyId input[type='radio']:checked");
 			if(!radioCheck.length) {
 				alert("请选择要修改的数据");
 				return;
 			}
-			$("#mainContentId").data("godsId", radioCheck.val());
+			$("#mainContentId").data("goodsId", radioCheck.val());
 			//拿到行数据绑定到大盒子上, 为了修改页面能拿到数据
 			$("#mainContentId").data("goodsRow", radioCheck.parents("tr").data("goodsRow"));
 		}

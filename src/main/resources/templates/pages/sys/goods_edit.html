@@ -96,6 +96,10 @@
     }
 
     $(function(){
+        if ($("#mainContentId").data("goodsRow")) {
+            initUpdateGoodsDate();
+        }
+
         //动态绑定
         $("#cateId").on("click", loadCateZTree);
         $(".box-footer").on("click", ".btn-cancel", backToGoodsUI)
@@ -110,7 +114,7 @@
         hideCateZtree();//隐藏节点
     }
     function backToGoodsUI() {
-        $("#mainContentId").data("goodsId", "");//返回取消绑定数据
+        $("#mainContentId").data("goodsRow", "");//返回取消绑定数据
         $("#mainContentId").load("goods/goods_list");
     }
     function saveOrUpdateGoods(){
@@ -134,11 +138,12 @@
             stock:stock,
             state:state
         }
-        var url = $("#mainContentId").data("goodsId") ? "goods/udpateGoods" : "goods/saveGoods";
-        if ($("#mainContentId").data("goodsId")) {
-            params.id = $("#mainContentId").data("goodsId");
+        var url = $("#mainContentId").data("goodsRow") ? "goods/udpateGoods" : "goods/saveGoods";
+        if ($("#mainContentId").data("goodsRow")) {
+            params.id = $("#mainContentId").data("goodsRow").id;
         }
         $.get(url,params,function (result){
+            debugger
             if (result.state == 1){
                 alert(result.data);
                 backToGoodsUI();
@@ -146,6 +151,27 @@
                 alert(result.message);
             }
         })
+    }
+    function initUpdateGoodsDate(){
+        var goods = $("#mainContentId").data("goodsRow");
+        var url = "goods/findGoodsCateVo";
+        $.get(url, {id : goods.id}, function(result) {
+            var data = result.data;
+            if(result.state == 1) {
+                $("#nameId").val(data.name);
+                $("#goodsImg").attr("src",data.imgUrl).show();
+                $("#cateId").val(data.category.name);
+                $("#cateId").data("cateId", data.category.id);
+                $("#priceId").val(data.price);
+                $("#subtitleId").val(data.subtitle);
+                $("#stockId").val(data.stock);
+                $("#stateValue input[value='"+ data.state +"']").prop("checked", true);
+            } else {
+                alert(result.message);
+            }
+            console.log(result);
+        })
+
     }
     function hideCateZtree() {
         $("#treeLayer").hide(300);
