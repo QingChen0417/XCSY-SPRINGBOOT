@@ -19,7 +19,13 @@ public class UserController {
     @RequestMapping("findUsermemberVo")
     public JsonResult findUsermemberVo(String username, @RequestParam(defaultValue = "1") Integer curPage,@RequestParam(defaultValue = "5") Integer pageSize) {
         Pagination pageObj = userService.findUsermemberVo(username, curPage, pageSize);
-        return new JsonResult(1);
+        return new JsonResult(pageObj);
+    }
+
+    @RequestMapping("updateValid")
+    public JsonResult updateValid(Integer id, Integer valid) {
+        userService.updateValid(id, valid);
+        return new JsonResult("修改成功");
     }
 
 }

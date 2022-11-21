@@ -4,6 +4,7 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.zzxy.common.entity.PageProperties;
 import com.zzxy.common.entity.Pagination;
+import com.zzxy.common.entity.PageProperties;
 import com.zzxy.common.util.Assert;
 import com.zzxy.xc.dao.LogDao;
 import com.zzxy.xc.entity.Log;

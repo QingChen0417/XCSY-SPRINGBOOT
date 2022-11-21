@@ -7,10 +7,10 @@ import lombok.Data;
 
 //会员信息实体类
 @Data
-public class Members implements Serializable{
+public class Member implements Serializable{
 	private static final long serialVersionUID = 6087253410364854719L;
-	private Integer id;//商品ID
-	private String memberName;//成员名
+	private Integer id;//会员ID
+	private String memberName;//会员名
 	private Date createdTime;//创建时间
 	private String createdUser;//创建的用户
 	private Date modifiedTime;//变质时间

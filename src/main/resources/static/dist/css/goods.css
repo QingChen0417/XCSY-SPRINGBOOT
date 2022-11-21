@@ -1,0 +1,21 @@
+#tb-tr > td{
+    height: 50px;
+    padding-top: 23px;
+}
+.table-img > img{
+    width: 50px;
+    height: 50px;
+}
+#tb-tr td:nth-child(2) {
+    padding-top: 5px;
+}
+.btn-delete,.btn-update{
+    cursor: pointer;
+}
+.table-subtitle{
+    width: 250px;
+    max-width: 240px;
+    overflow:hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
