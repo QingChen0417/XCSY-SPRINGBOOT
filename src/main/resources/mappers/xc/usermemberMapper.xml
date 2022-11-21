@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zzxy.xc.dao.UsermemberDao">
+
+    <sql id="queryUsername">
+        <where>
+            <if test="username !=null and username !=''">
+                username like concat("%", #{username}, "%")
+            </if>
+        </where>
+    </sql>
+
+    <select id="findUsermemberVo" resultMap="memberData">
+        select * from xc_users
+        <include refid="queryUsername"/>
+        order by createdTime
+    </select>
+
+    <resultMap id="memberData" type="com.zzxy.xc.vo.UsermemberVo">
+        <association property="member" column="memberId" select="com.zzxy.xc.dao.MemberDao.findMemberById"></association>
+    </resultMap>
+
+</mapper>

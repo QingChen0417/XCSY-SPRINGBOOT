@@ -13,4 +13,11 @@ public interface UserService {
      * @return
      */
     Pagination findUsermemberVo(String username, Integer curPage, Integer pageSize);
+
+    /**
+     * 通过用户id修改用户账号状态
+     * @param id 用户id
+     * @param valid 用户状态
+     */
+    void updateValid(Integer id, Integer valid);
 }
