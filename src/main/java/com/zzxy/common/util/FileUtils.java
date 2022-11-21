@@ -15,7 +15,7 @@ import java.util.UUID;
 
 public class FileUtils {
 
-    private static final String TX_DOMAIN = "https://yxg-1312422386.cos.ap-guangzhou.myqcloud.com/";
+    private static final String TX_DOMAIN = "https://xcsy-1312424207.cos.ap-guangzhou.myqcloud.com/";
 
     /**
      * 上传图片

@@ -18,8 +18,10 @@
                     <form id="upLoadImgForm" enctype="multipart/form-data">
                        <input type="file" id="upLoadImg" name="file" style="display: none">
                         <label for="upLoadImg" class="group-label">选择图片</label>
-                        <img src="" id="goodsImg">
                     </form>
+                    <div style="border: #d2d6de 1px solid; width: 81px;height: 81px;">
+                        <img style="display: none" src="" id="goodsImg">
+                    </div>
                 </div>
             </div>
             <div class="form-group">
@@ -87,7 +89,7 @@
             simpleData : {
                 enable : true,
                 idKey : "id",  //节点数据中保存唯一标识的属性名称
-                pIdKey : "parentId",  //节点数据中保存其父节点唯一标识的属性名称
+                pIdKey : "parentid",  //节点数据中保存其父节点唯一标识的属性名称
                 rootPId : null  //根节点id
             }//json 格式javascript对象
         }
@@ -166,18 +168,18 @@
 
     /* 文件改变时触发文件上传 */
     $('#upLoadImg').change(function(){
-        // 设置ajax参数
-        var options = {
-            url : "upload/uploadImage",
-            type: "POST",
-            success: function (data) {
-                // 设置图片地址
-                var imgUrl = ""+data;
-                $("#goodsImg").attr("src", imgUrl);
+            var formData = new FormData();
+            formData.append('file', $('#upLoadImg')[0].files[0]);
+            $.ajax({
+                "url":"upload/uploadImage",
+                "type":"POST",
+                "data":formData,
+                "processData": false,
+                "contentType": false,
+                "success": function (result) {
+                   $("#goodsImg").attr("src", result).show();
             }
-        }
-        // 提交表单
-        $('#upLoadImgForm').ajaxSubmit(options);
+        })
         return false;
     })
 </script>

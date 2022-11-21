@@ -47,6 +47,10 @@ spring:
   web:
     resources:
       static-locations: classpath:/templates/,classpath:/static/images/,classpath:/static
+  servlet:
+    multipart:
+      max-file-size: 1000MB
+      max-request-size: 1000MB
 pagehelper:
    helper-dialect: mysql #指定方言为mysql
    reasonable: true #分页查询合理化(当前页>最大页 为最大页(<0为1))

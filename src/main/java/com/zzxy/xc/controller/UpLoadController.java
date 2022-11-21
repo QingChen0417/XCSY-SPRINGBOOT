@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 @Controller
-@RequestMapping("upload")
+//@RequestMapping("upload")
 public class UpLoadController {
 
     /**
@@ -23,7 +23,7 @@ public class UpLoadController {
      * @return
      */
     @ResponseBody
-    @RequestMapping("uploadImage")
+    //@RequestMapping("uploadImage")
     public String uploadImage(@RequestParam("file") MultipartFile file, HttpServletRequest request) {
 
         //获取项目classes/static的地址
