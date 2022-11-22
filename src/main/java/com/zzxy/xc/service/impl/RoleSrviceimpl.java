@@ -7,8 +7,11 @@ import com.zzxy.common.entity.PageProperties;
 import com.zzxy.common.entity.Pagination;
 import com.zzxy.common.util.Assert;
 import com.zzxy.xc.dao.RoleDao;
+import com.zzxy.xc.dao.RoleMenuDao;
+import com.zzxy.xc.dao.UserRoleDao;
 import com.zzxy.xc.entity.Role;
 import com.zzxy.xc.service.RoleService;
+import com.zzxy.xc.vo.SysRoleMenuVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +22,13 @@ import java.util.List;
 public class RoleSrviceimpl implements RoleService {
 
     @Autowired
-    private RoleDao roledao;
+    private RoleDao roleDao;
+
+    @Autowired
+    private RoleMenuDao roleMenuDao;
+
+    @Autowired
+    private UserRoleDao userRoleDao;
 
     @Autowired
     private PageProperties pp;
@@ -28,9 +37,52 @@ public class RoleSrviceimpl implements RoleService {
         Assert.isEmpty(pageSize==null||curPage==null,"请选择当前页码或每页条数!");
         pageSize = pageSize ==0 ? pp.getPageSize() : pageSize;
         Page<Role> page = PageHelper.startPage(curPage,pageSize);
-        List<Role> list = roledao.findRole(name);
+        List<Role> list = roleDao.findRole(name);
         Pagination pageObj = new Pagination(curPage, (int)page.getTotal(), pageSize);
         pageObj.setPageData(list);
         return pageObj;
+    }
+    public Integer insertRole(Role role, Integer[] ids) {
+        //1.验证角色参数
+        Assert.isEmpty(role==null|| role.getName()==null || role.getName().equals(""), "请填写角色名！");
+        //2.插入角色
+        Assert.isEmpty(ids==null|| ids.length==0, "必须为角色分配权限");
+        //3.验证
+        Role r = roleDao.findroleByName(role.getName());
+        Assert.isEmpty(r!=null,"角色名已存在！");
+        Integer rows = roleDao.insertRole(role);
+        Assert.isEmpty(rows==0, "角色添加失败！");
+        //4.插入角色和菜单的关系数据
+        roleMenuDao.insertRoleById(role.getId(), ids);
+        //5.再验证结果
+        return rows;
+    }
+    /**
+     * 删除角色
+     * **/
+    public Integer deleteRoleById(Integer id) {
+        Assert.isEmpty(id==null||id == 0,"请选择要删除的对象！");
+        roleMenuDao.deleteRoleMenuByMenuId(id);
+        userRoleDao.deteleuserRoleByRoleId(id);
+        int rows=roleDao.deleteRoleById(id);
+        //3,验证结果
+        Assert.isEmpty(rows==0, "角色不存在或以被删除！");
+        return rows;
+    }
+
+    public SysRoleMenuVO findRoleMenuIds(Integer id) {
+        Assert.isEmpty(id==null|| id==0, "请选择要修改的角色！");
+        SysRoleMenuVO  vo = roleDao.findRoleMenuIds(id);
+        Assert.isEmpty(vo==null, "角色不存在！");
+        return vo;
+    }
+    public Integer updateRoleById(SysRoleMenuVO vo) {
+        Assert.isEmpty(vo==null||vo.getId()==null, "请选择要修改的角色！");
+        //结果角色查找菜单的关系数据
+        roleMenuDao.deleteRoleMenuByRoleId(vo.getId());
+        roleMenuDao.insertRoleById(vo.getId(),vo.getMenuIds().toArray(new Integer[] {}));
+        int n = roleDao.updateRoleById(vo);
+        Assert.isEmpty(n==0, "修改失败！");
+        return n;
     }
 }

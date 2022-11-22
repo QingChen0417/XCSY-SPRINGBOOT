@@ -23,12 +23,12 @@
 				  <table class="table table-hover">
 					<thead>
 						<tr>
-						    <th>序号</th>
+							<th>序号</th>
 							<th>角色名称</th>
 							<th>备注</th>
 							<th>创建时间</th>
-							<th>修改时间</th>
 							<th>创建用户</th>
+							<th>修改时间</th>
 							<th>修改用户</th>
 							<th>操作</th>
 						</tr>
@@ -50,7 +50,7 @@
 	   //先加载分页页面, 再访问数据
 	  $("#pageId").load("doPageUI",doGetObjects());
    })
-   
+
    function doGetObjects() {
 	   var url = "role/findRole";
 	   var curPage = $("#pageId").data("curPage");
@@ -69,7 +69,7 @@
 		   }
 	   })
    }
-   
+
    function loadRoleData(data) {
 	   var tbody = $("#tbodyId");
 	   tbody.empty();//清空表格主体部分
@@ -77,10 +77,10 @@
 		   var d = data[i];
 		   var tr = "<tr><td>" + (i+1) + "</td>"
 		   		+ "<td>" + d.name + "</td>"
-		   		+ "<td>" + (d.note ? d.note : "") + "</td>"
+		        + "<td>"+d.note+"</td>"
 		   		+ "<td>" + (d.createdTime ? d.createdTime : "") + "</td>"
-		   		+ "<td>" + (d.modifiedTime ? d.modifiedTime : "") + "</td>"
 		   		+ "<td>" + (d.createdUser ? d.createdUser : "") + "</td>"
+		        + "<td>" + (d.modifiedTime ? d.modifiedTime : "") + "</td>"
 		   		+ "<td>" + (d.modifiedUser ? d.modifiedUser : "") + "</td>"
 		   		+ "<td><a class='btn-delete'>删除</a>&nbsp;<a class='btn-update'>修改</a></td></tr>";
 		   	tbody.append(tr);
@@ -92,10 +92,9 @@
 	   $(".btn-search").on("click", doGetObjects);
    }
 
-   
    function editRoleUI() {
-	   var title = $(this).hasClass("btn-add") ? "添加菜单" : "修改菜单";
-	   if(title == '修改菜单') {
+	   var title = $(this).hasClass("btn-add") ? "添加角色" : "修改角色";
+	   if(title == '修改角色') {
 		   var roleId = $(this).parents("tr").data("roleId");
 		   $("#mainContentId").data("roleId", roleId);
 	   }
@@ -103,7 +102,7 @@
 		   $(".box-title").text(title);
 	   });
    }
-   
+
    function deleteRole() {
 	   var url = "role/deleteRole";
 	   if(!confirm("确定删除吗? ")) {
@@ -114,8 +113,9 @@
 	   var id = $(this).parents("tr").data("roleId");
 	   var params = {id, id};
 	   $.get(url, params, function(result) {
+		   debugger
 		   if(result.state == 0) {
-			   alert(reult.message);
+			   alert(result.message);
 		   } else if(result.state == 1) {
 			   alert(result.data);
 			   doGetObjects();
