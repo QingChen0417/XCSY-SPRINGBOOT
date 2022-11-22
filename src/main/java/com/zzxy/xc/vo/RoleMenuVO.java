@@ -6,7 +6,7 @@ import java.util.List;
 import lombok.Data;
 
 @Data
-public class SysRoleMenuVO implements Serializable{
+public class RoleMenuVO implements Serializable{
 	/**
 	 * 
 	 */

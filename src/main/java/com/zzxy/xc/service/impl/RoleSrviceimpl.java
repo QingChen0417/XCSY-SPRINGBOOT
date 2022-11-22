@@ -11,7 +11,7 @@ import com.zzxy.xc.dao.RoleMenuDao;
 import com.zzxy.xc.dao.UserRoleDao;
 import com.zzxy.xc.entity.Role;
 import com.zzxy.xc.service.RoleService;
-import com.zzxy.xc.vo.SysRoleMenuVO;
+import com.zzxy.xc.vo.RoleMenuVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -45,16 +45,15 @@ public class RoleSrviceimpl implements RoleService {
     public Integer insertRole(Role role, Integer[] ids) {
         //1.验证角色参数
         Assert.isEmpty(role==null|| role.getName()==null || role.getName().equals(""), "请填写角色名！");
-        //2.插入角色
         Assert.isEmpty(ids==null|| ids.length==0, "必须为角色分配权限");
-        //3.验证
+        //2.验证角色名是否存在
         Role r = roleDao.findroleByName(role.getName());
         Assert.isEmpty(r!=null,"角色名已存在！");
+        //3.插入角色
         Integer rows = roleDao.insertRole(role);
         Assert.isEmpty(rows==0, "角色添加失败！");
         //4.插入角色和菜单的关系数据
         roleMenuDao.insertRoleById(role.getId(), ids);
-        //5.再验证结果
         return rows;
     }
     /**
@@ -70,13 +69,13 @@ public class RoleSrviceimpl implements RoleService {
         return rows;
     }
 
-    public SysRoleMenuVO findRoleMenuIds(Integer id) {
+    public RoleMenuVO findRoleMenuIds(Integer id) {
         Assert.isEmpty(id==null|| id==0, "请选择要修改的角色！");
-        SysRoleMenuVO  vo = roleDao.findRoleMenuIds(id);
+        RoleMenuVO vo = roleDao.findRoleMenuIds(id);
         Assert.isEmpty(vo==null, "角色不存在！");
         return vo;
     }
-    public Integer updateRoleById(SysRoleMenuVO vo) {
+    public Integer updateRoleById(RoleMenuVO vo) {
         Assert.isEmpty(vo==null||vo.getId()==null, "请选择要修改的角色！");
         //结果角色查找菜单的关系数据
         roleMenuDao.deleteRoleMenuByRoleId(vo.getId());

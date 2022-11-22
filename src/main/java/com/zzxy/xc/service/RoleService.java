@@ -2,7 +2,7 @@ package com.zzxy.xc.service;
 
 import com.zzxy.common.entity.Pagination;
 import com.zzxy.xc.entity.Role;
-import com.zzxy.xc.vo.SysRoleMenuVO;
+import com.zzxy.xc.vo.RoleMenuVO;
 
 public interface RoleService {
 
@@ -17,7 +17,7 @@ public interface RoleService {
      * @param vo
      * @return
      */
-    Integer updateRoleById(SysRoleMenuVO vo);
+    Integer updateRoleById(RoleMenuVO vo);
 
-    SysRoleMenuVO findRoleMenuIds(Integer id);
+    RoleMenuVO findRoleMenuIds(Integer id);
 }

@@ -1,7 +1,7 @@
 package com.zzxy.xc.dao;
 
 import com.zzxy.xc.entity.Role;
-import com.zzxy.xc.vo.SysRoleMenuVO;
+import com.zzxy.xc.vo.RoleMenuVO;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -11,7 +11,11 @@ import java.util.List;
 //角色dao层
 @Mapper
 public interface RoleDao {
-
+    /**
+     * 模糊查询
+     * @param name
+     * @return
+     */
     List<Role> findRole(String name);
 
     int insertRole(Role role);
@@ -31,11 +35,11 @@ public interface RoleDao {
      * @param id
      * @return
      */
-    SysRoleMenuVO findRoleMenuIds(Integer id);
+    RoleMenuVO findRoleMenuIds(Integer id);
 
     /**
      * 根据角色id修改角色菜单关系数据
      * */
-    Integer updateRoleById(SysRoleMenuVO vo);
+    Integer updateRoleById(RoleMenuVO vo);
 
 }

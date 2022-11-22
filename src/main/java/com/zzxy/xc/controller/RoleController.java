@@ -5,15 +5,12 @@ import com.zzxy.common.entity.Pagination;
 
 import com.zzxy.xc.entity.Role;
 import com.zzxy.xc.service.RoleService;
-import com.zzxy.xc.vo.SysRoleMenuVO;
+import com.zzxy.xc.vo.RoleMenuVO;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 //角色控制层
 @RestController
@@ -48,12 +45,12 @@ public class RoleController {
     }
     @RequestMapping("findRoleMenuIdsByRoleId")
     public JsonResult findRoleMenuIdsByRoleId(Integer id) {
-        SysRoleMenuVO vo = roleservice.findRoleMenuIds(id);
+        RoleMenuVO vo = roleservice.findRoleMenuIds(id);
         return new JsonResult(vo);
     }
 
    @RequestMapping("updateRoleById")
-   public JsonResult updataRoleById(SysRoleMenuVO vo) {
+   public JsonResult updataRoleById(RoleMenuVO vo) {
        roleservice.updateRoleById(vo);
        return new JsonResult("修改成功！");
    }

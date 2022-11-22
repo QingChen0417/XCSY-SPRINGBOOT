@@ -1,8 +1,6 @@
 package com.zzxy.xc.dao;
 
 
-import com.github.pagehelper.ISelect;
-import com.zzxy.xc.vo.SysRoleMenuVO;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
