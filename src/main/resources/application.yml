@@ -44,9 +44,13 @@ spring:
         allow-core-thread-timeout: false #核心线程超时是否销毁
         keep-alive: 30  #活着的时间,默认为秒
       thread-name-prefix: zz-pool-thread- #自定义线程名前缀
-  resources:
-    static-locations: classpath:/templates/,classpath:/static/images/,classpath:/static
-      
+  web:
+    resources:
+      static-locations: classpath:/templates/,classpath:/static/images/,classpath:/static
+  servlet:
+    multipart:
+      max-file-size: 1000MB
+      max-request-size: 1000MB
 pagehelper:
    helper-dialect: mysql #指定方言为mysql
    reasonable: true #分页查询合理化(当前页>最大页 为最大页(<0为1))

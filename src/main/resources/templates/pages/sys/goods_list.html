@@ -49,6 +49,8 @@
 <script type="text/javascript">
 	$(function(){
 		$("#pageId").load("doPageUI", doGetObjects());
+		$(".btn-search").on("click", doGetObjects);
+		$(".input-group-btn").on("click", ".btn-add, .btn-update", saveGoodsUI);
 	})
 	//页面加载完成异步加载当前页数据
    function doGetObjects(){
@@ -87,11 +89,42 @@
 			   + "<td class='table-price'>" + data.price + "</td>"
 			   + "<td class='table-subtitle'>" + (data.subtitle ? data.subtitle : "") + "</td>"
 			   + "<td class='table-price'>" + (data.stock ? data.stock : "0") + "</td>"
-			   + "<td class='table-button'>" + (data.state == 0 ? "下架" : "上架") + "</td>"
-			   + "<td><button type='button' class='btn btn-default btn-valid' onclick='changeValid(this)'>" + (data.state ? '下架' : '上架') + "</td></tr>";
+			   + "<td class='table-button'>" + (data.state ? "上架" : "下架") + "</td>"
+			   + "<td><button type='button' class='btn btn-default btn-valid' onclick='change(this)'>" + (data.state ? '下架' : '上架') + "</td></tr>";
 	   return tr;
    }
-
+	function change(btn) {
+		//找到当前行的id
+		var id = $(btn).parents("tr").data("goodsRow").id;
+		var s = $(btn).text() == '上架' ? 1 : 0;
+		var url = "goods/updateValid";
+		var params = {id : id, state : s};
+		$.get(url, params, function(result) {
+			if(result.state == 1) {
+				alert(result.data);
+				doGetObjects();
+			} else {
+				alert(result.message);
+			}
+		})
+	}
+	function saveGoodsUI(){
+		var bool = $(this).hasClass("btn-update");
+		var title = bool ? "修改商品" : "添加商品";
+		if(bool) {
+			var radioCheck = $("#tbodyId input[type='radio']:checked");
+			if(!radioCheck.length) {
+				alert("请选择要修改的数据");
+				return;
+			}
+			$("#mainContentId").data("goodsId", radioCheck.val());
+			//拿到行数据绑定到大盒子上, 为了修改页面能拿到数据
+			$("#mainContentId").data("goodsRow", radioCheck.parents("tr").data("goodsRow"));
+		}
+		$("#mainContentId").load("goods/goods_edit", function() {
+			$(".box-title").text(title);
+		});
+	}
 </script>
 
 
