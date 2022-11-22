@@ -24,9 +24,9 @@
           </div>
           
           <div class="form-group">
-            <label for="deptId" class="col-sm-2 control-label">所属部门</label>
+            <label for="memberId" class="col-sm-2 control-label">会员等级</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control load-sys-dept" readonly="readonly" id="deptId" placeholder="部门">
+              <input type="text" class="form-control load-sys-dept" readonly="readonly" id="memberId" placeholder="会员等级">
             </div>
           </div>
           
@@ -60,7 +60,7 @@
       </form>
      <div class="layui-layer layui-layer-page layui-layer-molv layer-anim" id="treeLayer" type="page" times="2" showtime="0" contype="object"
 		style="z-index:59891016; width: 300px; height: 450px; top: 100px; left: 500px; display:none">
-		<div class="layui-layer-title" style="cursor: move;">选择部门</div>
+		<div class="layui-layer-title" style="cursor: move;">选择会员</div>
 		<div class="layui-layer-content" style="height: 358px;">
 			<div style="padding: 10px;" class="layui-layer-wrap">
 				<ul id="zTreeId" class="ztree"></ul>    <!-- 动态加载树 -->
@@ -76,7 +76,7 @@
 <script type="text/javascript" src="bower_components/ztree/jquery.ztree.all.min.js"></script>
 <script type="text/javascript" src="bower_components/layer/layer.js"></script>
 <script type="text/javascript">
-	var zTree; 
+	var zTree;
 	//初始化zTree时会用到
 	var setting = {
 		data : {
@@ -88,10 +88,10 @@
 			}//json 格式javascript对象
 		}
 	}//json 格式的javascript对象
-	
+
 	$(function (){
-		loadRolesData();//初始加载角色数据
-		$("#deptId").on("click", loadDeptZTree);
+		//loadRolesData();//初始加载角色数据
+		$("#memberId").on("click", loadMemberZTree);
 		$(".layui-layer").on("click", ".btn-cancel", hideDetZtree)
 						 .on("click", ".btn-confirm", sureDeptId);
 		$(".box-footer").on("click", ".btn-cancel", backToUserList)
@@ -100,8 +100,8 @@
 	
 	function sureDeptId() {
 		var node = zTree.getSelectedNodes();//得到被选中的节点
-		$("#deptId").val(node[0].name);
-		$("#deptId").data("deptId", node[0].id);
+		$("#memberId").val(node[0].name);
+		$("#memberId").data("memberId", node[0].id);
 		hideDetZtree();//隐藏节点
 	}
 	
@@ -110,9 +110,9 @@
 		//判断名字, 密码, 部门, 角色不能为空
 		var username = $("#usernameId").val();
 		var password = $("#passwordId").val();
-		var deptId = $("#deptId").data("deptId");
+		var memberId = $("#deptId").data("deptId");
 		var email = $("#emailId").val();
-		var mobile = $("#phoneId").val();
+		var phone = $("#phoneId").val();
 		var checks = $(".roles-ul input[type='checkbox']:checked");
 		var roleIds = [];
 		for(var i = 0; i < checks.length; i++) {
@@ -203,8 +203,8 @@
 		$("#treeLayer").hide(300);
 	}
 	
-	function loadDeptZTree() {
-		var url = "dept/findDeptZtree";
+	function loadMemberZTree() {
+		var url = "member/findMemberZtree";
 		$.get(url, {}, function(result) {
 			if(result.state == 1) {
 				zTree = $.fn.zTree.init($("#zTreeId"), setting, result.data);
