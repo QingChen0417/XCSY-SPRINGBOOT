@@ -37,6 +37,11 @@ public interface RoleMenuDao {
     @Delete("delete from xc_roles_menus where role_id=#{roleId}")
     Integer deleteRoleMenuByRoleId(Integer roleId);
 
+    /**
+     * 通过roleId所有菜单id
+     * @param roleId
+     * @return
+     */
     @Select("select menu_Id from xc_roles_menus where role_id=#{roleId}")
     List<Integer> findMenuIdsByRoleId(Integer roleId);
 
