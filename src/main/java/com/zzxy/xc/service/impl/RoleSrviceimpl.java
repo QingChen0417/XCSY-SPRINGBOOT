@@ -75,6 +75,11 @@ public class RoleSrviceimpl implements RoleService {
         Assert.isEmpty(vo==null, "角色不存在！");
         return vo;
     }
+
+    public List<Role> findAllRole() {
+        return roleDao.findAllRole();
+    }
+
     public Integer updateRoleById(RoleMenuVO vo) {
         Assert.isEmpty(vo==null||vo.getId()==null, "请选择要修改的角色！");
         //结果角色查找菜单的关系数据

@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 //角色控制层
 @RestController
 @RequestMapping("/role")
@@ -53,6 +55,12 @@ public class RoleController {
    public JsonResult updataRoleById(RoleMenuVO vo) {
        roleservice.updateRoleById(vo);
        return new JsonResult("修改成功！");
+   }
+
+   @RequestMapping("findAllRole")
+   public JsonResult findAllRole() {
+        List<Role> list = roleservice.findAllRole();
+        return new JsonResult(list);
    }
 
 }

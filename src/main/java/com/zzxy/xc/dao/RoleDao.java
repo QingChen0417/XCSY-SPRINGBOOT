@@ -42,4 +42,10 @@ public interface RoleDao {
      * */
     Integer updateRoleById(RoleMenuVO vo);
 
+    /**
+     * 查找所有角色
+     * @return 角色集合
+     */
+    @Select("select * from xc_roles")
+    List<Role> findAllRole();
 }

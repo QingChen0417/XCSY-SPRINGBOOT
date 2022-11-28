@@ -4,6 +4,8 @@ import com.zzxy.common.entity.Pagination;
 import com.zzxy.xc.entity.Role;
 import com.zzxy.xc.vo.RoleMenuVO;
 
+import java.util.List;
+
 public interface RoleService {
 
     Pagination findRole(String name, Integer pageSize, Integer curPage);
@@ -20,4 +22,10 @@ public interface RoleService {
     Integer updateRoleById(RoleMenuVO vo);
 
     RoleMenuVO findRoleMenuIds(Integer id);
+
+    /**
+     * 查找所有角色
+     * @return 角色集合
+     */
+    List<Role> findAllRole();
 }
