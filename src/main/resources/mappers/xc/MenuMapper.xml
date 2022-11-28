@@ -7,5 +7,21 @@
 	<select id="findObjects" resultType="map">
 		select c.*,p.name parentName from xc_menus c left join xc_menus p on c.parentid = p.id
 	</select>
-
+	<!-- 根据菜单id找儿子的数据 -->
+	<select id="getCountChildByMenuId" resultType="Integer">
+		select count(1) c from xc_menus where parentId=#{menuId}
+	</select>
+	<!-- 根据id删除菜单 -->
+	<delete id="deleteMenuById">
+		delete from xc_menus where id=#{menuId}
+	</delete>
+	<select id="findZtreeMenuNodes" resultType="com.zzxy.common.entity.Node">
+		select id,name,parentId from xc_menus
+	</select>
+	<insert id="insertMenu" parameterType="com.zzxy.xc.entity.Menu">
+	insert into xc_menus values(null,#{name},#{url},#{type},#{sort},#{note},#{parentId},#{permission},now(),now(),null,null)
+	</insert>
+	<update id="updateMenu">
+		update xc_menus set name=#{name},type=#{type},sort=#{sort},url=#{url},parentId=#{parentId},permission=#{permission},modifiedTime=now() where id=#{id}
+	</update>
 </mapper>
