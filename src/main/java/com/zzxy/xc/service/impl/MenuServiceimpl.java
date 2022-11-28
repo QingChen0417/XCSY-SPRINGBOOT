@@ -30,12 +30,12 @@ public class MenuServiceimpl implements MenuService {
         //查看当前菜单id的子菜单数量
         Integer n = dao.getCountChildByMenuId(menuId);
         //如果子菜单数量大于0则直接抛出异常
-        Assert.isEmpty(n<0,"有子菜单不允许删除！");
+        Assert.isEmpty(n>0,"有子菜单不允许删除！");
         //如果子菜单数量等于0则删除菜单与权限的关系数据
         rmDao.deleteRoleMenuByMenuId(menuId);
         //之后根据该id删除菜单
         Integer t =dao.deleteMenuById(menuId);
-        Assert.isEmpty(t==0, "菜单可能以被删除！");
+        Assert.isEmpty(t==0, "菜单可能已被删除！");
         return t;
     }
     public List<Node> findZtreeMenuNodes() {
