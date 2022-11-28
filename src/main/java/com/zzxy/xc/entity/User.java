@@ -15,7 +15,7 @@ public class User implements Serializable {
 	private String salt;
 	private String email;
 	private String phone;
-	private Integer valid;
+	private Integer valid = 1;
 	private Integer memberId;
 	private Date createdTime;
 	private String createdUser;
