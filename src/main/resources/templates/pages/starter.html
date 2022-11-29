@@ -34,16 +34,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <![endif]-->
 
   <!-- Google Font -->
-<style type="text/css">
-	.roles-ul {
-		margin-left: -40px;
-	}
-	.role-li {
-		list-style-type: none;
-		margin: 5px 30px 0 0;
-		float: left;
-	}
-</style>
+  <style type="text/css">
+    .roles-ul {
+      margin-left: -40px;
+    }
+    .role-li {
+      list-style-type: none;
+      margin: 5px 30px 0 0;
+      float: left;
+    }
+  </style>
 </head>
 <!--
 BODY TAG OPTIONS:
@@ -260,10 +260,10 @@ desired effect
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">HEADER</li>
         <!-- Optionally, you can add icons to the links -->
-        
+
         <li class="treeview">
-          <a href="#"><i class="fa fa-link"></i> 
-          <span>系统管理</span>
+          <a href="#"><i class="fa fa-link"></i>
+            <span>系统管理</span>
             <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
@@ -273,19 +273,19 @@ desired effect
           </ul>
         </li>
         <li class="treeview">
-        <a href="#"><i class="fa fa-link"></i> 
-        <span>商品管理</span>
-         <span class="pull-right-container">
+          <a href="#"><i class="fa fa-link"></i>
+            <span>商品管理</span>
+            <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
          </span>
-        </a>       
-        <ul class="treeview-menu">
+          </a>
+          <ul class="treeview-menu">
             <li><a id="load-goods-id">商品列表</a></li>
-        </ul>
-        </li> 
+          </ul>
+        </li>
         <li class="treeview">
-          <a href="#"><i class="fa fa-link"></i> 
-          <span>用户管理</span>
+          <a href="#"><i class="fa fa-link"></i>
+            <span>用户管理</span>
             <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
@@ -295,8 +295,8 @@ desired effect
           </ul>
         </li>
         <li class="treeview">
-          <a href="#"><i class="fa fa-link"></i> 
-          <span>订单管理</span>
+          <a href="#"><i class="fa fa-link"></i>
+            <span>订单管理</span>
             <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
@@ -306,8 +306,8 @@ desired effect
           </ul>
         </li>
         <li class="treeview">
-          <a href="#"><i class="fa fa-link"></i> 
-          <span>日志管理</span>
+          <a href="#"><i class="fa fa-link"></i>
+            <span>日志管理</span>
             <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
@@ -341,7 +341,7 @@ desired effect
       </ul>
       <!-- /.sidebar-menu -->
     </section>
-  
+
     <!-- /.sidebar -->
   </aside>
 
@@ -361,7 +361,7 @@ desired effect
     <!-- Main content -->
     <section id="mainContentId" class="content container-fluid">
 
-     
+
     </section>
     <!-- /.content -->
   </div>
@@ -478,27 +478,27 @@ desired effect
 <!-- AdminLTE App -->
 <script src="dist/js/adminlte.min.js"></script>
 <script type="text/javascript">
-	var idUrls = [
-		{id : "load-log-id", url : "sys/log_list"},
-        {id : "load-goods-id", url : "sys/goods_list"},
-        {id : "load-user-id", url : "sys/user_list"},
-        {id : "load-role-id", url : "sys/role_list"},
-        {id : "load-menu-id", url : "sys/menu_list"}
-      /*
-		{id : "load-user-id", url : "sys/user_list"},
-		{id : "load-dept-id", url : "sys/dept_list"} */
-	];
-	$(function(){
-		//key元素下标, value为下标对应的元素
-		$.each(idUrls, function(key, value){
-			doPageUI(value.id, value.url);
-		})
-	})
-	function doPageUI(id, url) {
-		$("#" + id).click(function(){
-			$("#mainContentId").load(url);
-		});
-	}
+  var idUrls = [
+    {id : "load-log-id", url : "sys/log_list"},
+    {id : "load-goods-id", url : "sys/goods_list"},
+    {id : "load-user-id", url : "sys/user_list"},
+    {id : "load-role-id", url : "sys/role_list"},
+    {id : "load-menu-id", url : "sys/menu_list"},
+    {id : "load-user-id", url : "sys/user_list"},
+    {id : "load-dept-id", url : "sys/dept_list"},
+    {id : "load-order-id", url : "sys/order_list"}
+  ];
+  $(function(){
+    //key元素下标, value为下标对应的元素
+    $.each(idUrls, function(key, value){
+      doPageUI(value.id, value.url);
+    })
+  })
+  function doPageUI(id, url) {
+    $("#" + id).click(function(){
+      $("#mainContentId").load(url);
+    });
+  }
 </script>
 </body>
 </html>

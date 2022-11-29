@@ -42,4 +42,12 @@ public interface GoodsDao {
      @Update("update xc_goods set cateid=#{cateid}, name=#{name}, subtitle=#{subtitle}," +
              "imgUrl=#{imgUrl}, price=#{price}, stock=#{stock},state=#{state},modifiedTime=now(),modifiedUser=#{modifiedUser} where id = #{id}")
     Integer updateGoods(Goods goods);
+
+    /**
+     * 根据商品id查找商品名
+     * @param id
+     * @return
+     */
+     @Select("select * from xc_goods where id=#{id}")
+     Goods finGoodsById(Integer id);
 }
