@@ -12,9 +12,9 @@ public class Category implements Serializable {
 	
 	private Integer id;//类别ID
 	private String name;//类别名
-	private Integer parentid;//
-	private Integer state;//类别状态
-	private Integer sort;//商品类别分类
+	private Integer parentId;//上级分类Id
+	private String state;//状态
+	private Integer sort;//排序型号
 	private Date createdTime;//创建时间
 	private String createdUser;//创建的用户
 	private Date modifiedTime;//变质时间

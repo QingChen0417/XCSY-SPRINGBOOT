@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace:命名空间 对应一个dao层的全路径 -->
+<mapper namespace="com.zzxy.xc.dao.CategoryDao">
+
+	<select id="findObjects" resultType="map">
+		select c.*,p.name parentName from xc_category c left join xc_category p on c.parentid = p.id
+	</select>
+	<select id="findZtreeCategoryCnodeId" resultType="com.zzxy.common.entity.Cnode">
+		select id,name,parentId from xc_category
+	</select>
+	<insert id="insertCategory" parameterType="com.zzxy.xc.entity.Category">
+	insert into xc_category values(null,#{name},#{parentId},#{state},#{sort},now(),null,now(),null)
+	</insert>
+	<update id="updateCategory">
+		update xc_category set name=#{name},parentId=#{parentId},state=#{state},sort=#{sort},modifiedTime=now() where id=#{id}
+	</update>
+	<!-- 根据分类id找儿子的数据 -->
+	<select id="getCountChildByCategoryId" resultType="Integer">
+		select count(1) c from xc_category where parentId=#{menuId}
+	</select>
+	<!-- 根据id删除分类 -->
+	<delete id="deleteCategoryById">
+		delete from xc_category where id=#{menuId}
+	</delete>
+</mapper>
