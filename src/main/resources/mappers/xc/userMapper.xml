@@ -3,4 +3,32 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zzxy.xc.dao.UserDao">
 
+    <insert id="insertUser" keyProperty="id" parameterType="com.zzxy.xc.entity.User" useGeneratedKeys="true" >
+        insert into xc_users (username,password,email,phone,salt,valid,memberId,createdTime,modifiedTime,createdUser,modifiedUser)
+        values(#{username},#{password},#{email},#{phone},#{salt},#{valid},#{memberId},now(),now(),#{createdUser},#{modifiedUser})
+    </insert>
+
+    <select id="findRoleByUserId" resultType="Integer">
+        select role_id from xc_users_roles where user_id = #{userId}
+    </select>
+
+    <update id="updateUser">
+        update xc_users
+        <set>
+            <if test="memberId != null">
+                memberId = #{memberId},
+            </if>
+            <if test="email != null">
+                email = #{email},
+            </if>
+            <if test="phone != null">
+                phone = #{phone},
+            </if>
+            <if test="modifiedUser != null">
+                modifiedUser = #{modifiedUser}
+            </if>
+            modifiedTime = now()
+            where id = #{id}
+        </set>
+    </update>
 </mapper>

@@ -15,4 +15,8 @@ public class JsonResult {
 	public JsonResult(Object data) {
 		this.data =data;
 	}
+
+    public JsonResult() {
+
+    }
 }
