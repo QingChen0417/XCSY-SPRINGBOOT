@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zzxy.xc.dao.OrderDao">
+    <sql id="orders">
+        <where>
+            <if test="orderid != null and orderid != ''">
+                orderid like concat("%", #{orderid}, "%")
+            </if>
+        </where>
+    </sql>
+
+    <!-- 查询所有信息 -->
+    <!--<select id="findOrder" resultType="com.zzxy.xc.entity.Order">
+        select * from xc_orders
+        <include refid="orders"/>
+        order by createdTime
+    </select>-->
+    <select id="findOrder" resultMap="orderids">
+        select * from xc_orders
+        <include refid="orders"/>
+        order by createdTime
+    </select>
+    <resultMap id="orderids" type="com.zzxy.xc.vo.UserGoodsShoppingVo">
+        <!-- 查找用户地址信息... -->
+        <collection property="shopping" select="com.zzxy.xc.dao.ShoppingDao.findShoppingById" column="shoppingid"></collection>
+        <!-- 查找商品名 -->
+        <collection property="goods" select="com.zzxy.xc.dao.GoodsDao.finGoodsById" column="goodsid"></collection>
+    </resultMap>
+    <!-- 根据id删除订单信息 -->
+    <delete id="deleteOrderByIds">
+        delete from xc_orders where id in
+        <foreach collection="array" open="(" separator="," close=")" item="ids">
+            #{ids}
+        </foreach>
+    </delete>
+</mapper>

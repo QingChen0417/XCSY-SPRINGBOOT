@@ -1,6 +1,6 @@
 <div class="box box-info">
       <div class="box-header with-border">
-        <h3 class="box-title">添加商品</h3>
+        <h3 class="box-title">修改订单</h3>
       </div>
       <!-- /.box-header -->
       <!-- form start -->
@@ -15,13 +15,7 @@
             <div class="form-group">
                 <label class="col-sm-2 control-label">图片</label>
                 <div class="col-sm-10">
-                    <form id="upLoadImgForm" enctype="multipart/form-data">
-                       <input type="file" id="upLoadImg" name="file" style="display: none">
-                        <label for="upLoadImg" class="group-label">选择图片</label>
-                    </form>
-                    <div style="border: #d2d6de 1px solid; width: 81px;height: 81px;">
-                        <img style="display: none" src="" id="goodsImg">
-                    </div>
+                    <input type="text" class="form-control" name="name" id="name" placeholder="商品名称">
                 </div>
             </div>
             <div class="form-group">
@@ -82,44 +76,20 @@
     </div>
 <script type="text/javascript" src="bower_components/ztree/jquery.ztree.all.min.js"></script>
 <script type="text/javascript">
-    var zTree;
-    //初始化zTree时会用到
-    var setting = {
-        data : {
-            simpleData : {
-                enable : true,
-                idKey : "id",  //节点数据中保存唯一标识的属性名称
-                pIdKey : "parentid",  //节点数据中保存其父节点唯一标识的属性名称
-                rootPId : null  //根节点id
-            }//json 格式javascript对象
-        }
-    }
 
     $(function(){
-        if ($("#mainContentId").data("goodsRow")) {
+        if ($("#mainContentId").data("orderRow")) {
             initUpdateGoodsDate();
         }
 
-        //动态绑定
-        $("#cateId").on("click", loadCateZTree);
-        $(".box-footer").on("click", ".btn-cancel", backToGoodsUI)
-                        .on("click", ".btn-save", saveOrUpdateGoods);
-        $(".layui-layer").on("click", ".btn-cancel", hideCateZtree)
-                         .on("click", ".btn-confirm", sureCateId);
     })
-    function sureCateId() {
-        var node = zTree.getSelectedNodes();//得到被选中的节点
-        $("#cateId").val(node[0].name);
-        $("#cateId").data("cateId", node[0].id);
-        hideCateZtree();//隐藏节点
-    }
     function backToGoodsUI() {
-        $("#mainContentId").data("goodsRow", "");//返回取消绑定数据
-        $("#mainContentId").load("goods/goods_list");
+        $("#mainContentId").data("orderRow", "");//返回取消绑定数据
+        $("#mainContentId").load("order/order_list");
     }
     function saveOrUpdateGoods(){
         var name = $("#nameId").val();
-        var imgUrl = $("#goodsImg").attr("src");
+        var imgUrl = $("#").val();
         var cate = $("#cateId").data("cateId");
         var price = $("#priceId").val();
         var subtitle = $("#subtitleId").val();
@@ -130,17 +100,11 @@
             return;
         }
         var params = {
-            name:name,
-            cateid: cate,
-            imgUrl:imgUrl,
-            price:price,
-            subtitle:subtitle,
-            stock:stock,
-            state:state
+
         }
-        var url = $("#mainContentId").data("goodsRow") ? "goods/udpateGoods" : "goods/saveGoods";
-        if ($("#mainContentId").data("goodsRow")) {
-            params.id = $("#mainContentId").data("goodsRow").id;
+        var url = "goods/udpateGoods";
+        if ($("#mainContentId").data("orderRow")) {
+            params.id = $("#mainContentId").data("orderRow").id;
         }
         $.get(url,params,function (result){
             if (result.state == 1){

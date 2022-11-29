@@ -5,20 +5,24 @@ import com.github.pagehelper.PageHelper;
 import com.zzxy.common.entity.PageProperties;
 import com.zzxy.common.entity.Pagination;
 import com.zzxy.common.util.Assert;
+import com.zzxy.common.util.ShiroUtil;
 import com.zzxy.xc.dao.UserDao;
+import com.zzxy.xc.dao.UserRoleDao;
 import com.zzxy.xc.dao.UsermemberDao;
+import com.zzxy.xc.entity.User;
 import com.zzxy.xc.vo.UsermemberVo;
+import org.apache.shiro.crypto.hash.SimpleHash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.zzxy.xc.service.UserService;
 
 import java.util.List;
+import java.util.UUID;
 
 //用户业务接口实现类
 @Service
-public
-class UserserviceImpl implements UserService {
+public class UserserviceImpl implements UserService {
 
 
     @Autowired
@@ -26,6 +30,9 @@ class UserserviceImpl implements UserService {
 
     @Autowired
     private UsermemberDao umDao;
+
+    @Autowired
+    private UserRoleDao userRoleDao;
 
     @Autowired
     private PageProperties pp;
@@ -43,5 +50,34 @@ class UserserviceImpl implements UserService {
         Assert.isEmpty(id == null || id == 0, "请选择要修改的用户");
         Integer n = dao.updateValid(id, valid);
         Assert.isEmpty(n == 0, "修改失败");
+    }
+
+    public void saveUser(User user, Integer[] roleIds) {
+        Assert.isEmpty(user == null || user.getUsername() == null || user.getUsername().equals(""), "请输入用户名");
+        Assert.isEmpty(roleIds == null || roleIds.length == 0, "请选择角色");
+        String salt = UUID.randomUUID().toString();
+        SimpleHash sh = new SimpleHash("MD5", user.getPassword(), salt, 1);
+        String password = sh.toHex();
+        user.setSalt(salt);
+        user.setPassword(password);
+        User u = dao.findUserByName(user.getUsername());//查找用户是否存在
+        Assert.isEmpty(u != null, "用户名已存在");
+        Integer n = dao.insertUser(user);
+        Assert.isEmpty(n == 0, "添加失败");
+        userRoleDao.insertUserRole(user.getId(), roleIds);
+    }
+
+    public List<Integer> findRoleByUserId(Integer userId) {
+        Assert.isEmpty(userId == null || userId == 0, "请选择要修改的用户");
+        return dao.findRoleByUserId(userId);
+    }
+
+    public void updateUser(User user, Integer[] roleIds) {
+        Assert.isEmpty(roleIds == null || roleIds.length == 0, "请选择角色");
+        //user.setModifiedUser(ShiroUtil.getUsername());
+        Integer n = dao.updateUser(user);
+        Assert.isEmpty(n == 0, "修改失败");
+        userRoleDao.deleteRoleUserId(user.getId());
+        userRoleDao.insertUserRole(user.getId(), roleIds);
     }
 }

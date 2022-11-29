@@ -1,5 +1,6 @@
 package com.zzxy.xc.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,8 +23,10 @@ public class Goods implements Serializable {
 	private Double price;//价格
 	private Integer stock;//库存
 	private Integer state;//状态
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
 	private Date createdTime;//创建时间
 	private String createdUser;//创建的用户
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
 	private Date modifiedTime;//修改时间
 	private String modifiedUser;//修改的用户
 

@@ -211,16 +211,15 @@
 		console.log(user);
 		$("#usernameId").val(user.username);
 		$("#passwordId").val(user.password);
-		$("#deptId").val(user.sysDept.name);
+		$("#memberId").val(user.member.name);
 		$("#emailId").val(user.email);
-		$("#phoneId").val(user.mobile);
-		$("#deptId").data("deptId", user.sysDept.id);//绑定部门id
+		$("#phoneId").val(user.phone);
+		$("#memberId").data("memberId", user.member.id);//绑定部门id
 		//把用户名和密码设置为只读
 		$("#passwordId, #usernameId").attr("readonly", "readonly");
 		var param = {userId : user.id};
 		//通过用户id查找角色
 		$.get("user/findRoleByUserId", param, function(result) {
-			console.log(result);
 			var inps = $(".roles-ul input");
 			var roleIds = result.data;//所有角色id
 			for(var i = 0; i < roleIds.length; i++) {

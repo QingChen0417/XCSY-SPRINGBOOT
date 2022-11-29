@@ -28,4 +28,9 @@ public class PageController {
 	public String upLoadUI() {
 		return "upload";
 	}
+
+	@RequestMapping("doLoginUI")
+	public String doLoginUI() {
+		return "login";
+	}
 }
