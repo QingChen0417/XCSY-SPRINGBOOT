@@ -7,7 +7,7 @@
 	<select id="findObjects" resultType="map">
 		select c.*,p.name parentName from xc_category c left join xc_category p on c.parentid = p.id
 	</select>
-	<select id="findZtreeCategoryCnodeId" resultType="com.zzxy.common.entity.Cnode">
+	<select id="findZtreeCategoryCnodeId" resultType="com.zzxy.common.entity.Node">
 		select id,name,parentId from xc_category
 	</select>
 	<insert id="insertCategory" parameterType="com.zzxy.xc.entity.Category">
