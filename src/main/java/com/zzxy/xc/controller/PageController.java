@@ -15,8 +15,9 @@ public class PageController {
 	//"{module}/{page}" : 可以统一接受访问路径
 	//参数需加@PathVariable()注解
 	@RequestMapping("{module}/{page}")
-	public String doModuleUI(@PathVariable("page") String page) {
-		return "sys/"+page;
+	public String doModuleUI(@PathVariable("module") String module, @PathVariable("page") String page) {
+		System.out.println(module + "=-====");
+		return module + "/" + page;
 	}
 
 	@RequestMapping("doPageUI")
