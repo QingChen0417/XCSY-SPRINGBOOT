@@ -75,7 +75,7 @@
 			if (result.state == 0) {
 				alert(result.message);
 			}else if(result.state == 1){
-				alert("成功删除" + result.data +"条数据！");
+				alert(result.data);
 				doGetObjects();//刷新数据
 			}
 		});

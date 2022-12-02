@@ -1,8 +1,10 @@
 package com.zzxy.xc.vo;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 @Data
@@ -20,4 +22,10 @@ public class RoleMenuVO implements Serializable{
 	/**角色对应的菜单id*/
 	private List<Integer> menuIds;
 
+	@JsonFormat(pattern = "yyyy-MM-dd")
+	private Date createdTime;//创建时间
+	private String createdUser;//创建的用户
+	@JsonFormat(pattern = "yyyy-MM-dd")
+	private Date modifiedTime;//修改时间
+	private String modifiedUser;//修改的用户
 }

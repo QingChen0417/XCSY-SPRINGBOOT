@@ -2,6 +2,7 @@ package com.zzxy.xc.service.impl;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.zzxy.common.annotation.RequirdLog;
 import com.zzxy.common.entity.PageProperties;
 import com.zzxy.common.entity.Pagination;
 import com.zzxy.common.util.Assert;
@@ -37,6 +38,7 @@ public class UserserviceImpl implements UserService {
     @Autowired
     private PageProperties pp;
 
+    @RequirdLog("查询用户")
     public Pagination findUsermemberVo(String username, Integer curPage, Integer pageSize) {
         pageSize = pageSize ==0 ? pp.getPageSize() : pageSize;
         Page<UsermemberVo> page = PageHelper.startPage(curPage,pageSize);
@@ -52,6 +54,7 @@ public class UserserviceImpl implements UserService {
         Assert.isEmpty(n == 0, "修改失败");
     }
 
+    @RequirdLog("添加用户")
     public void saveUser(User user, Integer[] roleIds) {
         Assert.isEmpty(user == null || user.getUsername() == null || user.getUsername().equals(""), "请输入用户名");
         Assert.isEmpty(roleIds == null || roleIds.length == 0, "请选择角色");

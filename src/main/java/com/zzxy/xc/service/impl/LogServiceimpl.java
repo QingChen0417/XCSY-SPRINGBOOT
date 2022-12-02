@@ -4,14 +4,14 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.zzxy.common.entity.PageProperties;
 import com.zzxy.common.entity.Pagination;
-import com.zzxy.common.entity.PageProperties;
 import com.zzxy.common.util.Assert;
 import com.zzxy.xc.dao.LogDao;
 import com.zzxy.xc.entity.Log;
 import com.zzxy.xc.service.LogService;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -24,7 +24,7 @@ public class LogServiceimpl implements LogService{
 
 	@Autowired
 	private PageProperties pp;
-
+	
 	public Pagination findLogService(String username, Integer pageSize, Integer curPage) {
 		pageSize = pageSize ==0 ? pp.getPageSize() : pageSize;
 		Page<Log> page = PageHelper.startPage(curPage,pageSize);
@@ -39,5 +39,9 @@ public class LogServiceimpl implements LogService{
 		int n = dao.doDeleteByIds(ids);
 		Assert.isEmpty(n==0,"数据已被删除！");
 		return n;
+	}
+	public void insertLog(Log log) {
+		dao.insertLog(log);
+
 	}
 }

@@ -92,7 +92,7 @@ public class RoleSrviceimpl implements RoleService {
 
     public Integer updateRoleById(Role role,RoleMenuVO vo) {
         Assert.isEmpty(vo==null||vo.getId()==null, "请选择要修改的角色！");
-        role.setCreatedUser(ShiroUtil.getUsername());
+        vo.setModifiedUser(ShiroUtil.getUsername());
         //结果角色查找菜单的关系数据
         roleMenuDao.deleteRoleMenuByRoleId(vo.getId());
         roleMenuDao.insertRoleById(vo.getId(),vo.getMenuIds().toArray(new Integer[] {}));

@@ -20,4 +20,8 @@
 			#{ids}
 	</foreach>
 	</delete>
+	<insert id="insertLog">
+		insert into xc_logs(username,operation,method,params,time,ip,createdTime)
+		values (#{username},#{operation},#{method},#{params},#{time},#{ip},#{createdTime})
+	</insert>
 </mapper>

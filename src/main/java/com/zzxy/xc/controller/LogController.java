@@ -23,6 +23,6 @@ public class LogController {
 	@RequestMapping("deleteLog")
 	public JsonResult findLogDelete(@RequestParam("ids[]") Integer[] ids){
 		int n = service.doDeleteLog(ids);
-		return new JsonResult("删除成功！");
+		return new JsonResult("成功删除"+n+"条数据！");
 	}
 }
