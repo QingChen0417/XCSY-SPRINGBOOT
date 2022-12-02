@@ -45,14 +45,14 @@ var columns = [
 	 field : 'id',
 	 align : 'center',
 	 valign : 'middle',
-	 width : '90px'
+	 width : '36px'
 	},
 	{
 	 title : '分类名称',
 	 field : 'name',
 	 align : 'center',
 	 valign : 'middle',
-	 width : '80px'
+	 width : '50px'
 	},
 	{
 	 title : '上级分类',
@@ -60,14 +60,14 @@ var columns = [
 	 align : 'center',
 	 valign : 'middle',
 	 sortable : true,
-	 width : '90px'
+	 width : '50px'
 	},
 	{
 		title : '状态',
 		field : 'state',
 		align : 'center',
 		valign : 'middle',
-		width : '70px',
+		width : '50px',
 	},
 	{
 		title : '排序号',
@@ -75,7 +75,7 @@ var columns = [
 		align : 'center',
 		valign : 'middle',
 		sortable : true,
-		width : '70px'
+		width : '50px'
 	},
 ];
 	function doGetObjects() {
@@ -86,6 +86,7 @@ var columns = [
 		var treeTable = new TreeTable("menuTable", "category/doFindCategory", columns);
 		//展开列,默认是第一列
 		//treeTable.setExpandColumn(3);
+		treeTable.setExpandColumn(1);
 		treeTable.init();
 	}
 	$(function(){

@@ -3,8 +3,8 @@
 		<div class="box">
 			<div class="box-header">
 				<h3 class="box-title">
-				
-				菜单管理</h3>
+
+					菜单管理</h3>
 
 				<div class="box-tools">
 					<div class="input-group input-group-sm" style="width: 100px;">
@@ -17,15 +17,15 @@
 				</div>
 			</div>
 			<!-- /.box-header -->
-		<div class="box-body table-responsive no-padding">
-          <table id="menuTable" class="table table-hover">
-        	<thead>
-	        <tr>
-		      <th data-field="selectItem" data-checkbox="true"></th>
-	        </tr>
-	       </thead>
-         </table>
-        </div>
+			<div class="box-body table-responsive no-padding">
+				<table id="menuTable" class="table table-hover">
+					<thead>
+					<tr>
+						<th data-field="selectItem" data-checkbox="true"></th>
+					</tr>
+					</thead>
+				</table>
+			</div>
 		</div>
 		<!-- /.box -->
 	</div>
@@ -34,93 +34,53 @@
 <script type="text/javascript" src="bower_components/treegrid/jquery.treegrid.min.js"></script>
 <script type="text/javascript" src="bower_components/treegrid/tree.table.js"></script>
 <script type="text/javascript">
-//bootstrap treegrid表格数据格式
-var columns = [
-	{
-	 field : 'selectItem',
-	 radio : true
-	},
-	{
-	 title : '菜单ID',
-	 field : 'id',
-	 align : 'center',
-	 valign : 'middle',
-	 width : '90px'
-	},
-	{
-	 title : '菜单名称',
-	 field : 'name',
-	 align : 'center',
-	 valign : 'middle',
-	 width : '130px'
-	},
-	{
-	 title : '上级菜单',
-	 field : 'parentName',
-	 align : 'center',
-	 valign : 'middle',
-	 sortable : true,
-	 width : '100px'
-	},
-	{
-	 title : '类型',
-	 field : 'type',
-	 align : 'center',
-	 valign : 'middle',
-	 width : '70px',
-	 formatter : function(item, index) {
-	  if (item.type == 1) {
-	   return '<span class="label label-success">菜单</span>';
-	  }
-	  if (item.type == 2) {
-	   return '<span class="label label-warning">按钮</span>';
-	  }
-	 }
-	},
-	{
-	 title : '排序号',
-	 field : 'sort',
-	 align : 'center',
-	 valign : 'middle',
-	 sortable : true,
-	 width : '70px'
-	}, 
-	{
-	 title : '菜单URL',
-	 field : 'url',
-	 align : 'center',
-	 valign : 'middle',
-
-	 width : '160px'
-	}, 
-	{
-	 title : '授权标识',//要显示的标题名称
-	 field : 'permission',//json串中的key
-	 align : 'center',//水平居中
-	 valign : 'middle',//垂直居中
-	 sortable : false //是否排序
-	} ];
-
+	//bootstrap treegrid表格数据格式
+	var columns = [
+		{
+			field : 'selectItem',
+			radio : true
+		},
+		{
+			title : '菜单ID',
+			field : 'id',
+			align : 'center',
+			valign : 'middle',
+			width : '90px'
+		},
+		{
+			title : '菜单名称',
+			field : 'name',
+			align : 'center',
+			valign : 'middle',
+			width : '130px'
+		},
+		{
+			title : '上级菜单',
+			field : 'parentName',
+			align : 'center',
+			valign : 'middle',
+			sortable : true,
+			width : '100px'
+		}];
 	function doGetObjects() {
 		//创建TreeTable对象(bootstrap提供treeGrid插件的对象)
 		//第一个参数: 数据填充到哪个表格中的id
 		//第二个参数: 访问路径
 		//第三个参数: columns,bootstrap-treeGrid规定的固定数据格式
-		var treeTable = new TreeTable("menuTable", "menu/doFindMenus", columns);
+		var treeTable = new TreeTable("menuTable", "category/doFindCategory", columns);
 		//展开列,默认是第一列
 		//treeTable.setExpandColumn(3);
 		treeTable.init();
 	}
-
 	$(function(){
 		doGetObjects();
 		//动态绑定删除事件
 		/* $(".btn-delete").click(doDeleteMenuById);
 		$(".btn-add").click(saveMenuUI); */
 		$(".input-group-btn").on("click", ".btn-delete", doDeleteMenuById)
-		.on("click", ".btn-add, .btn-update", saveMenuUI);
+				.on("click", ".btn-add, .btn-update", saveMenuUI);
 	})
-	
+
 	function saveMenuUI() {
 		var title = "添加菜单";
 		if($(this).hasClass("btn-update")){//如果是修改
@@ -145,7 +105,7 @@ var columns = [
 			$(".box-title").text(title);
 		});
 	}
-	
+
 	function doDeleteMenuById() {
 		var id = doGetCheckedId();
 		if(!id) {
@@ -168,7 +128,7 @@ var columns = [
 			}
 		})
 	}
-	
+
 	//获取被选中的菜单id
 	function doGetCheckedId(){
 		//1.获取选中的记录
@@ -179,5 +139,5 @@ var columns = [
 		} else {
 			return selections[0].id;
 		}
-}
+	}
 </script>
