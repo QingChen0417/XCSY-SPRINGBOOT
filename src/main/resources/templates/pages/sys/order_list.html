@@ -23,11 +23,12 @@
                     <thead>
                     <tr>
                         <th style="width: 80px;">序号</th>
-                        <th style="width: 100px;">姓名</th>
+                        <th style="width: 100px;">下单用户</th>
+                        <th style="width: 100px;">收货人</th>
                         <th style="width: 150px;">手机号</th>
-                        <th style="width: 400px;">地址</th>
+                        <th style="width: 300px;">收货地址</th>
                         <th style="width: 200px;">商品</th>
-                        <th style="width: 140px;">应付金额</th>
+                        <th style="width: 100px;">应付金额</th>
                         <th style="width: 260px;">订单编号</th>
                         <th style="width: 140px;">支付方式</th>
                         <th style="width: 200px;">下单时间</th>
@@ -109,10 +110,11 @@
     }
     function doCreateTr(data) {
         var tr = "<tr><td>" + data.id + "</td>"
+            + "<td>" + data.user.username + "</td>"
             + "<td>" + data.shopping.name + "</td>"
             + "<td>" + data.shopping.phone + "</td>"
-            + "<td>" + data.shopping.address + "</td>"
-            + "<td>" + data.goods.name + "</td>"
+            + "<td>" + (data.shopping.province + data.shopping.city + data.shopping.strict + data.shopping.address) + "</td>"
+            + "<td class='btn-data-shopping'>" + data.goods.name + "</td>"
             + "<td>" + data.payment + "</td>"
             + "<td>" + data.orderid + "</td>"
             + "<td>" + data.paymenttype + "</td>"

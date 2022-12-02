@@ -19,7 +19,7 @@ public interface RoleService {
      * @param vo
      * @return
      */
-    Integer updateRoleById(RoleMenuVO vo);
+    Integer updateRoleById(Role role, RoleMenuVO vo);
 
     RoleMenuVO findRoleMenuIds(Integer id);
 

@@ -16,4 +16,6 @@ public interface GoodsService {
     GoodsCateVo findGoodsCateVo(Integer id);
 
     Integer updateGoods(Goods goods);
+
+    Pagination deleteGoods(String name, Integer curPage, Integer pageSize);
 }

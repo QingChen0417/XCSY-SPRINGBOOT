@@ -39,6 +39,11 @@ public interface GoodsDao {
      */
      GoodsCateVo findGoodsCateVo(Integer id);
 
+    /**
+     * 修改商品信息
+     * @param goods
+     * @return
+     */
      @Update("update xc_goods set cateid=#{cateid}, name=#{name}, subtitle=#{subtitle}," +
              "imgUrl=#{imgUrl}, price=#{price}, stock=#{stock},state=#{state},modifiedTime=now(),modifiedUser=#{modifiedUser} where id = #{id}")
     Integer updateGoods(Goods goods);
@@ -50,4 +55,11 @@ public interface GoodsDao {
      */
      @Select("select * from xc_goods where id=#{id}")
      Goods finGoodsById(Integer id);
+
+    /**
+     * 加载近期删除的商品信息
+     * @param name
+     * @return
+     */
+    List<Goods> deleteGoods(String name);
 }

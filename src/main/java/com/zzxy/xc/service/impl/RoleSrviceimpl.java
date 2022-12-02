@@ -6,6 +6,7 @@ import com.github.pagehelper.PageHelper;
 import com.zzxy.common.entity.PageProperties;
 import com.zzxy.common.entity.Pagination;
 import com.zzxy.common.util.Assert;
+import com.zzxy.common.util.ShiroUtil;
 import com.zzxy.xc.dao.RoleDao;
 import com.zzxy.xc.dao.RoleMenuDao;
 import com.zzxy.xc.dao.UserRoleDao;
@@ -42,10 +43,18 @@ public class RoleSrviceimpl implements RoleService {
         pageObj.setPageData(list);
         return pageObj;
     }
+
+    /**
+     * 添加角色
+     * @param role
+     * @param ids
+     * @return
+     */
     public Integer insertRole(Role role, Integer[] ids) {
         //1.验证角色参数
         Assert.isEmpty(role==null|| role.getName()==null || role.getName().equals(""), "请填写角色名！");
         Assert.isEmpty(ids==null|| ids.length==0, "必须为角色分配权限");
+        role.setCreatedUser(ShiroUtil.getUsername());
         //2.验证角色名是否存在
         Role r = roleDao.findroleByName(role.getName());
         Assert.isEmpty(r!=null,"角色名已存在！");
@@ -71,6 +80,7 @@ public class RoleSrviceimpl implements RoleService {
 
     public RoleMenuVO findRoleMenuIds(Integer id) {
         Assert.isEmpty(id==null|| id==0, "请选择要修改的角色！");
+
         RoleMenuVO vo = roleDao.findRoleMenuIds(id);
         Assert.isEmpty(vo==null, "角色不存在！");
         return vo;
@@ -80,8 +90,9 @@ public class RoleSrviceimpl implements RoleService {
         return roleDao.findAllRole();
     }
 
-    public Integer updateRoleById(RoleMenuVO vo) {
+    public Integer updateRoleById(Role role,RoleMenuVO vo) {
         Assert.isEmpty(vo==null||vo.getId()==null, "请选择要修改的角色！");
+        role.setCreatedUser(ShiroUtil.getUsername());
         //结果角色查找菜单的关系数据
         roleMenuDao.deleteRoleMenuByRoleId(vo.getId());
         roleMenuDao.insertRoleById(vo.getId(),vo.getMenuIds().toArray(new Integer[] {}));

@@ -3,6 +3,7 @@ package com.zzxy.xc.vo;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.zzxy.xc.entity.Goods;
 import com.zzxy.xc.entity.Shopping;
+import com.zzxy.xc.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,7 +17,7 @@ import java.util.Date;
 public class UserGoodsShoppingVo {
     private Integer id;//订单ID
     private String orderid;//订单编号
-    private Integer userid;//用户ID
+    private User user;//用户
     private Goods goods;//商品
     private Shopping shopping;//收货地址
     private Integer payment;//付款金额

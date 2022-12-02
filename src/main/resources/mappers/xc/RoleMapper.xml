@@ -40,6 +40,6 @@
 	</resultMap>
 	<!--通过角色修改菜单！-->
 	<update id="updateRoleById">
-		update xc_roles set name=#{name},note=#{note},modifiedUser=now(),modifiedTime=now() where id=#{id}
+		update xc_roles set name=#{name},note=#{note},modifiedUser=#{modifiedUser},modifiedTime=now() where id=#{id}
 	</update>
 </mapper>

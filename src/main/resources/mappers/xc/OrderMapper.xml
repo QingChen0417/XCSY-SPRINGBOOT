@@ -22,10 +22,12 @@
         order by createdTime
     </select>
     <resultMap id="orderids" type="com.zzxy.xc.vo.UserGoodsShoppingVo">
-        <!-- 查找用户地址信息... -->
+        <!-- 查找地址信息... -->
         <collection property="shopping" select="com.zzxy.xc.dao.ShoppingDao.findShoppingById" column="shoppingid"></collection>
-        <!-- 查找商品名 -->
+        <!-- 查找商品信息 -->
         <collection property="goods" select="com.zzxy.xc.dao.GoodsDao.finGoodsById" column="goodsid"></collection>
+        <!-- 查找用户信息 -->
+        <collection property="user" select="com.zzxy.xc.dao.UserDao.findUserById" column="userid"></collection>
     </resultMap>
     <!-- 根据id删除订单信息 -->
     <delete id="deleteOrderByIds">

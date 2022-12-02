@@ -5,6 +5,7 @@ import com.github.pagehelper.PageHelper;
 import com.zzxy.common.entity.PageProperties;
 import com.zzxy.common.entity.Pagination;
 import com.zzxy.common.util.Assert;
+import com.zzxy.common.util.ShiroUtil;
 import com.zzxy.xc.dao.GoodsDao;
 import com.zzxy.xc.entity.Goods;
 import com.zzxy.xc.service.GoodsService;
@@ -41,6 +42,7 @@ public class GoodsServiceImpl implements GoodsService {
 
     public Integer saveGoods(Goods goods) {
         Assert.isEmpty(goods == null || goods.getName() == null, "请填写商品信息");
+        goods.setCreatedUser(ShiroUtil.getUsername());
         Integer n = dao.saveGoods(goods);
         Assert.isEmpty(n == 0, "添加失败");
         return n;
@@ -54,10 +56,18 @@ public class GoodsServiceImpl implements GoodsService {
 
     public Integer updateGoods(Goods goods) {
         Assert.isEmpty(goods == null || goods.getId() == 0 || goods.getId() == null, "请选择要修改的商品");
+        goods.setCreatedUser(ShiroUtil.getUsername());
         int n = dao.updateGoods(goods);
         Assert.isEmpty(n == 0,"修改失败");
         return n;
     }
 
-
+    public Pagination deleteGoods(String name, Integer curPage, Integer pageSize) {
+        pageSize = pageSize == 0 || pageSize == null ? pp.getPageSize() : pageSize;
+        Page<Goods> page = PageHelper.startPage(curPage, pageSize);
+        List<Goods> list =  dao.deleteGoods(name);
+        Pagination pageObj = new Pagination(curPage, (int)page.getTotal(), pageSize);
+        pageObj.setPageData(list);
+        return pageObj;
+    }
 }

@@ -51,4 +51,12 @@ public interface UserDao {
      * @return
      */
     Integer updateUser(User user);
+
+    /**
+     * 根据id查找用户
+     * @param id
+     * @return
+     */
+    @Select("select * from xc_users where id=#{id}")
+    User findUserById(Integer id);
 }

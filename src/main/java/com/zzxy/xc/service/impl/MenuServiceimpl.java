@@ -2,6 +2,7 @@ package com.zzxy.xc.service.impl;
 
 import com.zzxy.common.entity.Node;
 import com.zzxy.common.util.Assert;
+import com.zzxy.common.util.ShiroUtil;
 import com.zzxy.xc.dao.MenuDao;
 import com.zzxy.xc.dao.RoleMenuDao;
 import com.zzxy.xc.entity.Menu;
@@ -45,11 +46,13 @@ public class MenuServiceimpl implements MenuService {
     }
     public Integer insertMenu(Menu menu) {
         Assert.isEmpty(menu==null||menu.getName()==null,"菜单不存在！");
+        menu.setCreatedUser(ShiroUtil.getUsername());
         Integer n = dao.insertMenu(menu);
         return n;
     }
     public Integer updateMenu(Menu menu) {
         Assert.isEmpty(menu==null||menu.getName()==null, "请填写数据！");
+        menu.setCreatedUser(ShiroUtil.getUsername());
         Integer n = dao.updateMenu(menu);
         Assert.isEmpty(n==0, "菜单修改失败或者数据不存在！");
         return n;

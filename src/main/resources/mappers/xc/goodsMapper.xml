@@ -7,12 +7,19 @@
             <if test="name != null and name != ''">
                 name like concat("%", #{name}, "%")
             </if>
+            and state = 1
         </where>
     </sql>
 
     <select id="findGoods" resultType="com.zzxy.xc.entity.Goods">
         select * from xc_goods
         <include refid="goods"/>
+        order by createdTime
+    </select>
+    <!-- 查找近期删除的商品信息 -->
+    <select id="deleteGoods" resultType="com.zzxy.xc.entity.Goods">
+        select * from xc_goods
+        where name like concat("%", #{name}, "%") and state = 0
         order by createdTime
     </select>
 

@@ -52,8 +52,8 @@ public class RoleController {
     }
 
    @RequestMapping("updateRoleById")
-   public JsonResult updataRoleById(RoleMenuVO vo) {
-       roleservice.updateRoleById(vo);
+   public JsonResult updataRoleById(Role role, RoleMenuVO vo) {
+       roleservice.updateRoleById(role, vo);
        return new JsonResult("修改成功！");
    }
 

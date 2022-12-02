@@ -41,10 +41,28 @@
     width: 80px;
     height: 80px;
 }
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
+input[type=number] {
+    -moz-appearance:textfield;
+}
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
     -webkit-appearance: none;
+    margin: 0;
 }
-input[type="number"]{
-    -moz-appearance: textfield;
+.btn-data-shopping{
+    width: 200px;
+    max-width: 190px;
+    overflow:hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
+
+
+
+
+
+
+
+
+
+

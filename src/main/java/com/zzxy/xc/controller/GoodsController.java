@@ -41,7 +41,12 @@ public class GoodsController {
     @RequestMapping("updateValid")
     public JsonResult updateValid(Integer id, Integer state){
         service.updateValid(id,state);
-        return new JsonResult("修改成功");
+        return new JsonResult("删除成功");
+    }
+    @RequestMapping("updateValids")
+    public JsonResult updateValids(Integer id, Integer state){
+        service.updateValid(id,state);
+        return new JsonResult("已恢复");
     }
 
     /**
@@ -71,5 +76,20 @@ public class GoodsController {
         service.updateGoods(goods);
         System.out.println(goods);
         return new JsonResult("修改成功");
+    }
+
+    /**
+     * 加载近期删除的商品信息和分页信息
+     * @param name
+     * @param curPage
+     * @param pageSize
+     * @return
+     */
+    @RequestMapping("deleteGoods")
+    public JsonResult deleteGoods(String name,
+                                  @RequestParam(defaultValue = "1") Integer curPage,
+                                  @RequestParam(defaultValue = "0") Integer pageSize){
+        Pagination pagina = service.deleteGoods(name, curPage, pageSize);
+        return new JsonResult(pagina);
     }
 }
