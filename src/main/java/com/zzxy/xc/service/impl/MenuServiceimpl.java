@@ -25,6 +25,7 @@ public class MenuServiceimpl implements MenuService {
     public List<Map<String, Object>> findObjects() {
         List<Map<String,Object>> list = dao.findObjects();
         Assert.isEmpty(list == null || list.size() == 0, "菜单不存在");
+        System.out.println(list);
         return list;
     }
     public Integer deleteMenuById(Integer menuId) {

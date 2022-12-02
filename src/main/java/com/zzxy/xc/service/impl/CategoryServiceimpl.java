@@ -20,6 +20,7 @@ public class CategoryServiceimpl implements CategoryService {
     public List<Map<String, Object>> findObjects() {
         List<Map<String,Object>> list = dao.findObjects();
         Assert.isEmpty(list == null || list.size() == 0, "分类数据不存在");
+        System.out.println(list);
         return list;
     }
     public List<Cnode> findZtreeCategoryCnodes() {

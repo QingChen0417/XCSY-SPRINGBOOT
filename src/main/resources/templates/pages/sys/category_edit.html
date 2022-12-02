@@ -16,13 +16,17 @@
           <div class="form-group">
             <label for="parentId" class="col-sm-2 control-label">上级分类</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control load-sys-menu" readonly="readonly" id="parentId" placeholder="上级分类">
+              <input type="text" class="form-control load-sys-category" readonly="readonly" id="parentId" placeholder="上级分类">
             </div>
           </div>
             <div class="form-group">
                 <label for="stateId" class="col-sm-2 control-label">状态</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" id="stateId" placeholder="状态">
+                <div class="col-sm-10" id="stateId">
+                    <label for="stateQyon">启用</label>
+                    <input type="radio" name="radio" id="stateQyon" value="启用" checked>
+                    <label for="stateJyon">禁用</label>
+                    <input type="radio" name="radio" id="stateJyon" value="禁用">
+                </div>
                 </div>
             </div>
 		  <div class="form-group">
@@ -66,15 +70,15 @@
   			data : {
   				simpleData : {
   					enable : true,//默认是false,把数据当作array, true会转为json
-  					idKey : "id", //菜单id
-  					pIdKey : "parentId", //父菜单id
+  					idKey : "id", //分类id
+  					pIdKey : "parentId", //父分类id
   					rootPId : null //根节点
   				}
   			}
   	}
   	
   	$(function(){
-  		$(".load-sys-menu").click(zTreeMenuShow);
+  		$(".load-sys-category").click(zTreeMenuShow);
   		$(".layui-layer-close, .layui-layer-btn1").click(zTreeMenuHide);
   		$(".btn-confirm").click(choiceParentMenu);
   		$(".btn-default").click(backToMenuList);
@@ -102,7 +106,7 @@
   		var params = {
   				type : $("form input[name='typeId']:checked").val(),
   				name : $("#nameId").val(),
-  				state : $("#stateId").val(),
+  				state : $("#stateId input[type='radio']:checked").val(),
   				sort : $("#sortId").val(),
   				parentId : $("#parentId").data("parentId")
   		};
