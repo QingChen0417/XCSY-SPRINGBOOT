@@ -49,13 +49,21 @@ input[type=number]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
-.btn-data-shopping{
+/*.btn-data-shopping{
     width: 200px;
     max-width: 190px;
     overflow:hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+}*/
+.table-hover{
+    overflow-x : auto;
+    -ms-overflow-style: none;
 }
+.ulbox {float: left; padding: 0 5px; margin-right: 10px; list-style: none;}
+.ulbox::-webkit-scrollbar-track{  -webkit-box-shadow: inset 0 0 2px rgba(0,0,0,0.3);  border-radius: 5px;  background-color: rgba(255,255,255,0.8);}
+.ulbox::-webkit-scrollbar{  height: 10px;			/*设置滚动条样式*/  background-color: rgba(0,0,0,0);}
+.ulbox::-webkit-scrollbar-thumb{  border-radius: 5px;  -webkit-box-shadow: inset 0 0 2px rgba(0,0,0,.3);  background-color: #55555517;}
 
 
 
