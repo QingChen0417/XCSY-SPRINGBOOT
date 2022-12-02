@@ -5,11 +5,11 @@ import com.github.pagehelper.PageHelper;
 import com.zzxy.common.entity.PageProperties;
 import com.zzxy.common.entity.Pagination;
 import com.zzxy.common.util.Assert;
-import com.zzxy.common.util.ShiroUtil;
 import com.zzxy.xc.dao.UserDao;
 import com.zzxy.xc.dao.UserRoleDao;
 import com.zzxy.xc.dao.UsermemberDao;
 import com.zzxy.xc.entity.User;
+import com.zzxy.xc.entity.UserInfo;
 import com.zzxy.xc.vo.UsermemberVo;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,5 +79,9 @@ public class UserserviceImpl implements UserService {
         Assert.isEmpty(n == 0, "修改失败");
         userRoleDao.deleteRoleUserId(user.getId());
         userRoleDao.insertUserRole(user.getId(), roleIds);
+    }
+
+    public UserInfo findUserInfoByUserId(Integer id) {
+        return dao.findUserInfoByUserId(id);
     }
 }

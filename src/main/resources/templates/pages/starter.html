@@ -3,7 +3,7 @@
 This is a starter template page. Use this page to start your new project from
 scratch. This page gets rid of all links and provides the needed markup only.
 -->
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -189,9 +189,9 @@ desired effect
             <!-- Menu Toggle Button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <!-- The user image in the navbar-->
-              <img src="dist/img/avatar04.png" class="user-image" alt="User Image">
+              <img src="dist/img/avatar04.png" class="user-image" alt="User Image" th:src="@{(${userInfo.headImg})}">
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
-              <span class="hidden-xs" id="loginUserId">Alexander Pierce</span>
+              <span class="hidden-xs" id="loginUserId" th:text="${user.username}">Alexander Pierce</span>
             </a>
             <ul class="dropdown-menu">
               <!-- The user image in the menu -->
@@ -490,13 +490,13 @@ desired effect
 <script src="dist/js/adminlte.min.js"></script>
 <script type="text/javascript">
 	var idUrls = [
-		{id : "load-log-id", url : "sys/log_list"},
-        {id : "load-goods-id", url : "sys/goods_list"},
-        {id : "load-user-id", url : "sys/user_list"},
-        {id : "load-role-id", url : "sys/role_list"},
-        {id : "load-menu-id", url : "sys/menu_list"},
-        {id : "load-category-id", url : "sys/category_list"},
-        {id : "load-order-id", url : "sys/order_list"}
+		{id : "load-log-id", url : "log/log_list"},
+        {id : "load-goods-id", url : "goods/goods_list"},
+        {id : "load-user-id", url : "user/user_list"},
+        {id : "load-role-id", url : "role/role_list"},
+        {id : "load-menu-id", url : "menu/menu_list"},
+        {id : "load-category-id", url : "category/category_list"},
+        {id : "load-order-id", url : "order/order_list"}
       /*
 		{id : "load-user-id", url : "sys/user_list"},
 		{id : "load-dept-id", url : "sys/dept_list"} */

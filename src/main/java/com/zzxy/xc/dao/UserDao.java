@@ -1,6 +1,7 @@
 package com.zzxy.xc.dao;
 
 import com.zzxy.xc.entity.User;
+import com.zzxy.xc.entity.UserInfo;
 import com.zzxy.xc.vo.UsermemberVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -59,4 +60,12 @@ public interface UserDao {
      */
     @Select("select * from xc_users where id=#{id}")
     User findUserById(Integer id);
+
+    /**
+     * 通过用户id查找用户详细信息
+     * @param id
+     * @return
+     */
+    @Select("select * from xc_user_info where userId = #{id}")
+    UserInfo findUserInfoByUserId(Integer id);
 }

@@ -2,6 +2,7 @@ package com.zzxy.xc.service;
 
 import com.zzxy.common.entity.Pagination;
 import com.zzxy.xc.entity.User;
+import com.zzxy.xc.entity.UserInfo;
 
 import java.util.List;
 
@@ -44,4 +45,11 @@ public interface UserService {
      * @param roleIds
      */
     void updateUser(User user, Integer[] roleIds);
+
+    /**
+     * 通过用户id查找用户详细信息
+     * @return
+     * @param id
+     */
+    UserInfo findUserInfoByUserId(Integer id);
 }
