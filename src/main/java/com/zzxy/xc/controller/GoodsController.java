@@ -75,8 +75,7 @@ public class GoodsController {
     public JsonResult updateGoods(Goods goods){
         service.updateGoods(goods);
         System.out.println(goods);
-        return new JsonResult("修改成功");
-    }
+        return new JsonResult("修改成功");    }
 
     /**
      * 加载近期删除的商品信息和分页信息
