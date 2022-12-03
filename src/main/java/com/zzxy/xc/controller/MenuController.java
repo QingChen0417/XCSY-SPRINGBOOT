@@ -15,7 +15,7 @@ public class MenuController {
     private MenuService service;
 
     @RequestMapping("doFindMenus")
-    private JsonResult doFindObjects() {
+    public JsonResult doFindObjects() {
         return new JsonResult (service.findObjects());
     }
     @RequestMapping("doDeleteMenu")
@@ -23,11 +23,11 @@ public class MenuController {
         return new JsonResult(service.deleteMenuById(menuId));
     }
     @RequestMapping("findZtreeMenuNodes")
-    private JsonResult findZtreeMenuNodes() {
+    public JsonResult findZtreeMenuNodes() {
         return new JsonResult(service.findZtreeMenuNodes());
     }
     @RequestMapping("saveMenu")
-    private JsonResult saveMenu(Menu menu) {
+    public JsonResult saveMenu(Menu menu) {
         JsonResult  jr = new  JsonResult(service.insertMenu(menu));
         jr.setMessage("添加成功！");
         return jr;
